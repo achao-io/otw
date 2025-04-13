@@ -1,3 +1,3 @@
-# otw
-- road to h4x0r
+# overthewire
+- real h4x
 - https://overthewire.org/wargames/
