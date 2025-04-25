@@ -1,3 +1,3 @@
 # overthewire
-- real h4x
+- h4xing
 - https://overthewire.org/wargames/
