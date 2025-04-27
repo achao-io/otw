@@ -6,12 +6,12 @@
 - `ssh bandit.labs.overthewire.org -l bandit0 -p 2220`
 
 
-## 0 -> 1
+## 1
 - https://overthewire.org/wargames/bandit/bandit1.html
 - `ssh bandit.labs.overthewire.org -l bandit1 -p 2220`
 - ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
 
-## 1 -> 2
+## 2
 - https://overthewire.org/wargames/bandit/bandit2.html
 - `more -`
 - 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
@@ -30,12 +30,12 @@ To make less read from stdin like more does, you need to use either:
 This is particularly relevant when dealing with files that start with a hyphen, as the hyphen can be misinterpreted as a command option. This is a common security consideration when handling files, which is why using './-' or similar explicit path references is considered a good practice.
 ```
 
-## 2 -> 3
+## 3
 - https://overthewire.org/wargames/bandit/bandit3.html
 - `more ~/"spaces in this filename"`
 - MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
 
-## 3 -> 4
+## 4
 - https://overthewire.org/wargames/bandit/bandit4.html
 - The password for the next level is stored in a hidden file in the inhere directory.
 ```
@@ -45,3 +45,7 @@ This is particularly relevant when dealing with files that start with a hyphen, 
 % cat ...Hiding-From-You
 ```
 - 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+
+## 5
+- https://overthewire.org/wargames/bandit/bandit5.html
+- The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
