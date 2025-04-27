@@ -30,4 +30,7 @@ To make less read from stdin like more does, you need to use either:
 This is particularly relevant when dealing with files that start with a hyphen, as the hyphen can be misinterpreted as a command option. This is a common security consideration when handling files, which is why using './-' or similar explicit path references is considered a good practice.
 ```
 
-
+## 2 -> 3
+- https://overthewire.org/wargames/bandit/bandit3.html
+- `more ~/"spaces in this filename"`
+- MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
