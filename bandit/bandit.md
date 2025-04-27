@@ -34,3 +34,14 @@ This is particularly relevant when dealing with files that start with a hyphen, 
 - https://overthewire.org/wargames/bandit/bandit3.html
 - `more ~/"spaces in this filename"`
 - MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+
+## 3 -> 4
+- https://overthewire.org/wargames/bandit/bandit4.html
+- The password for the next level is stored in a hidden file in the inhere directory.
+```
+% ls
+% cd inhere
+% ls -alh
+% cat ...Hiding-From-You
+```
+- 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
