@@ -49,4 +49,28 @@ This is particularly relevant when dealing with files that start with a hyphen, 
 ## 5
 - https://overthewire.org/wargames/bandit/bandit5.html
 - The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
+```
+% for file in ./-file*; do
+    echo "=== $file ==="
+    cat "$file"
+done
+
+=== ./-file00 ===
+�ŉOT���S �plS]-EH�t�:-�Z�
+                         === ./-file01 ===
+N$���'���Se��
+             \�- V�P�jls�����=== ./-file02 ===
+
+o5e�Mz9�#P�ws������Oh||xt��=== ./-file03 ===
+6|ر��Vܒ��q ��*rMӼ^';b\�=== ./-file04 ===
+
+x����]C�
+        �H`�/�X���OGLV=== ./-file05 ===
+��*��-o��w9�P�RAz�b��[��F�=== ./-file06 ===
+��_��+J��2X1�M�O�g��Y����d�Ŧj=== ./-file07 ===
+4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+=== ./-file08 ===
+t=== ./-file09 ===
+)�r�R�C#�ӧ��4��_�\����^�)C
+```
 
