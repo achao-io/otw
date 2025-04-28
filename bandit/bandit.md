@@ -74,3 +74,26 @@ t=== ./-file09 ===
 )�r�R�C#�ӧ��4��_�\����^�)C
 ```
 
+## 6
+- https://overthewire.org/wargames/bandit/bandit6.html
+- The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+human-readable
+1033 bytes in size
+not executable
+- `find ~/inhere -type f -size 1033c`
+```
+what other options are there for the "c" in -size 1033c?
+The size suffixes available in the find command are:
+c for bytes
+k for kilobytes
+M for megabytes
+G for gigabytes
+b for 512-byte blocks (default if no suffix)
+w for 2-byte words
+```
+```
+bandit5@bandit:~/inhere$ find ~/inhere -type f -size 1033c
+/home/bandit5/inhere/maybehere07/.file2
+bandit5@bandit:~/inhere$ cat /home/bandit5/inhere/maybehere07/.file2
+HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+```
