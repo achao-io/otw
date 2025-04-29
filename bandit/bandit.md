@@ -37,7 +37,9 @@ This is particularly relevant when dealing with files that start with a hyphen, 
 
 ## 4
 - https://overthewire.org/wargames/bandit/bandit4.html
-- The password for the next level is stored in a hidden file in the inhere directory.
+```
+The password for the next level is stored in a hidden file in the inhere directory.
+```
 ```
 % ls
 % cd inhere
@@ -48,7 +50,9 @@ This is particularly relevant when dealing with files that start with a hyphen, 
 
 ## 5
 - https://overthewire.org/wargames/bandit/bandit5.html
-- The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
+```
+The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
+```
 ```
 % for file in ./-file*; do
     echo "=== $file ==="
@@ -76,10 +80,13 @@ t=== ./-file09 ===
 
 ## 6
 - https://overthewire.org/wargames/bandit/bandit6.html
-- The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+```
+The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+
 human-readable
 1033 bytes in size
 not executable
+```
 - `find ~/inhere -type f -size 1033c`
 ```
 what other options are there for the "c" in -size 1033c?
@@ -97,3 +104,20 @@ bandit5@bandit:~/inhere$ find ~/inhere -type f -size 1033c
 bandit5@bandit:~/inhere$ cat /home/bandit5/inhere/maybehere07/.file2
 HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
 ```
+
+## 7
+- https://overthewire.org/wargames/bandit/bandit7.html
+```
+The password for the next level is stored somewhere on the server and has all of the following properties:
+
+owned by user bandit7
+owned by group bandit6
+33 bytes in size
+```
+```
+% find / -type f -user bandit7 -group bandit6 -size 33c 2> /dev/null
+/var/lib/dpkg/info/bandit7.password
+% cat /var/lib/dpkg/info/bandit7.password
+morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+```
+- `2> /dev/null` redirects error messages to the null device, hiding them. Cleaner output. 
