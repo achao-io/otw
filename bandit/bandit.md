@@ -121,3 +121,13 @@ owned by group bandit6
 morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
 ```
 - `2> /dev/null` redirects error messages to the null device, hiding them. Cleaner output. 
+
+## 8
+- https://overthewire.org/wargames/bandit/bandit8.html
+```
+The password for the next level is stored in the file data.txt next to the word millionth
+```
+```
+% grep millionth data.txt 
+millionth       dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+```
