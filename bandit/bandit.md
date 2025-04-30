@@ -142,3 +142,34 @@ The password for the next level is stored in the file data.txt and is the only l
 % sort data.txt | uniq -u
 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
 ```
+
+## 10
+https://overthewire.org/wargames/bandit/bandit10.html
+```
+The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
+```
+
+**How can I `cat data.txt` and extract "human readable strings"?**
+
+You can use the `strings` command on the file. The `strings` command extracts sequences of printable characters from a file. In your case, try running:
+
+`strings data.txt`
+
+This will output all human-readable strings from `data.txt`. If you want to specifically see lines starting with several '=' characters, you can combine it with `grep`, for example:
+
+`strings data.txt | grep '^==='`
+
+Adjust the number of '=' in your grep pattern to suit the expected number of preceding '=' characters.
+
+**why do you need the carot in front of the grep search string? e.g. `grep ''^==='`**
+
+The caret (^) in a grep search pattern is used as an anchor to match the beginning of the line. When you write `grep '^==='` it tells `grep` to only look for lines that start with "===", rather than matching "===" anywhere within the line. This is useful if you're trying to extract or filter lines that have a specific format where the characters should appear at the start.
+
+```
+% strings data.txt | grep "=="
+========== the
+========== password{k
+=========== is
+========== FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+```
+
