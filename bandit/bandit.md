@@ -131,3 +131,14 @@ The password for the next level is stored in the file data.txt next to the word 
 % grep millionth data.txt 
 millionth       dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
 ```
+
+## 9
+https://overthewire.org/wargames/bandit/bandit9.html
+```
+The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
+```
+- tried `cat data.txt | uniq -u` first, but didn't work. This is because `uniq` only removes consecutive duplicate lines. If duplicate lines are not adjacent, `uniq` won't consider them duplicates. To make sure identical lines are next to each other, `sort` the file first.
+```
+% sort data.txt | uniq -u
+4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+```
