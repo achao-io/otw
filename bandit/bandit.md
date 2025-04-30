@@ -1,18 +1,18 @@
 # bandit
 
 ## 0
-- https://overthewire.org/wargames/bandit/bandit0.html
+https://overthewire.org/wargames/bandit/bandit0.html
 - `ssh <url> --login/-l <user> --port/-p XXXX`
 - `ssh bandit.labs.overthewire.org -l bandit0 -p 2220`
 
 
 ## 1
-- https://overthewire.org/wargames/bandit/bandit1.html
+https://overthewire.org/wargames/bandit/bandit1.html
 - `ssh bandit.labs.overthewire.org -l bandit1 -p 2220`
 - ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
 
 ## 2
-- https://overthewire.org/wargames/bandit/bandit2.html
+https://overthewire.org/wargames/bandit/bandit2.html
 - `more -`
 - 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
 ```
@@ -31,12 +31,12 @@ This is particularly relevant when dealing with files that start with a hyphen, 
 ```
 
 ## 3
-- https://overthewire.org/wargames/bandit/bandit3.html
+https://overthewire.org/wargames/bandit/bandit3.html
 - `more ~/"spaces in this filename"`
 - MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
 
 ## 4
-- https://overthewire.org/wargames/bandit/bandit4.html
+https://overthewire.org/wargames/bandit/bandit4.html
 ```
 The password for the next level is stored in a hidden file in the inhere directory.
 ```
@@ -49,7 +49,7 @@ The password for the next level is stored in a hidden file in the inhere directo
 - 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
 
 ## 5
-- https://overthewire.org/wargames/bandit/bandit5.html
+https://overthewire.org/wargames/bandit/bandit5.html
 ```
 The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
 ```
@@ -79,7 +79,7 @@ t=== ./-file09 ===
 ```
 
 ## 6
-- https://overthewire.org/wargames/bandit/bandit6.html
+https://overthewire.org/wargames/bandit/bandit6.html
 ```
 The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
 
@@ -106,7 +106,7 @@ HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
 ```
 
 ## 7
-- https://overthewire.org/wargames/bandit/bandit7.html
+https://overthewire.org/wargames/bandit/bandit7.html
 ```
 The password for the next level is stored somewhere on the server and has all of the following properties:
 
@@ -123,7 +123,7 @@ morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
 - `2> /dev/null` redirects error messages to the null device, hiding them. Cleaner output. 
 
 ## 8
-- https://overthewire.org/wargames/bandit/bandit8.html
+https://overthewire.org/wargames/bandit/bandit8.html
 ```
 The password for the next level is stored in the file data.txt next to the word millionth
 ```
@@ -173,3 +173,12 @@ The caret (^) in a grep search pattern is used as an anchor to match the beginni
 ========== FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
 ```
 
+## 11
+https://overthewire.org/wargames/bandit/bandit11.html
+```
+The password for the next level is stored in the file data.txt, which contains base64 encoded data
+```
+```
+% base64 -d data.txt
+The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
+```
