@@ -182,3 +182,24 @@ The password for the next level is stored in the file data.txt, which contains b
 % base64 -d data.txt
 The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
 ```
+
+
+## 12
+https://overthewire.org/wargames/bandit/bandit12.html
+```
+The password for the next level is stored in the file data.txt, where all 
+lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
+```
+- use `tr` to handle char rotation
+```
+% cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+The password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+
+--
+ROT13 Character Mapping
+'A-Za-z' represents the input character set (all letters A to Z, both uppercase and lowercase)
+'N-ZA-Mn-za-m' represents the output character set where each letter is shifted 13 positions forward
+The mapping works by:
+A→N, B→O, ..., M→Z, N→A, ..., Z→M (uppercase)
+a→n, b→o, ..., m→z, n→a, ..., z→m (lowercase)
+```
