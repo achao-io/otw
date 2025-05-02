@@ -321,3 +321,32 @@ data8.bin: ASCII text
 bandit12@bandit:/tmp/tmp.MbsFdVhoZU$ cat data8.bin
 The password is FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
 ```
+
+## 14
+https://overthewire.org/wargames/bandit/bandit14.html
+```
+Level Goal
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on
+
+Commands you may need to solve this level
+ssh, telnet, nc, openssl, s_client, nmap
+
+Helpful Reading Material
+SSH/OpenSSH/Keys
+```
+
+Tools to learn...
+`ssh` - ssh (SSH client) is a program for logging into a remote machine and for executing commands on a remote machine.   It  is intended  to  provide secure encrypted communications between two untrusted hosts over an insecure network.  X11 connections, arbitrary TCP ports and Unix-domain sockets can also be forwarded over the secure channel.
+telnet - 
+nc
+openssl
+s_client
+nmap
+
+-i identity_file
+        Selects  a file from which the identity (private key) for public key authentication is read.  You can also spec‐ify a public key file to use the corresponding private key that is loaded in ssh-agent(1) when the  private  key file   is   not   present   locally.    The   default  is  ~/.ssh/id_rsa,  ~/.ssh/id_ecdsa,  ~/.ssh/id_ecdsa_sk, ~/.ssh/id_ed25519, ~/.ssh/id_ed25519_sk and ~/.ssh/id_dsa.  Identity files may also be specified on  a  per-host basis  in the configuration file.  It is possible to have multiple -i options (and multiple identities specified in configuration files).  If no certificates have been explicitly specified by  the  CertificateFile  directive, ssh  will also try to load certificate information from the filename obtained by appending -cert.pub to identity
+        filenames.
+
+```
+bandit13@bandit:~$ ssh bandit.labs.overthewire.org -l bandit14 -p 2220 -i sshkey.private
+```
