@@ -350,3 +350,69 @@ nmap
 ```
 bandit13@bandit:~$ ssh bandit.labs.overthewire.org -l bandit14 -p 2220 -i sshkey.private
 ```
+
+## 15
+https://overthewire.org/wargames/bandit/bandit15.html
+```
+Level Goal
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+```
+```
+bandit14@bandit:/etc/bandit_pass$ pwd
+/etc/bandit_pass
+bandit14@bandit:/etc/bandit_pass$ cat bandit14
+MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+```
+
+what does it mean to "submit the password to port 30000 on localhost"? foreign terminology to me.
+
+Analogy from Cursor: "Think of it like knocking on a specific door (port 30000) of your house (localhost) and saying a password to get a response back."
+
+
+```
+nc localhost 30000
+telnet localhost 30000
+```
+
+what are these two commands "doing"?
+
+```
+Both nc (netcat) and telnet are network communication tools that establish a connection to a specified host and port. In this case, they're both trying to connect to port 30000 on localhost (your own machine). Here's what each does:
+
+nc localhost 30000 (netcat):
+- Creates a TCP connection to port 30000 on localhost
+- Opens a simple, raw connection where you can send and receive text
+- More modern and versatile tool
+- Often used for debugging, testing, and simple network connections
+- After connecting, you can type the password and press Enter to send it
+
+telnet localhost 30000:
+- Also creates a connection to port 30000 on localhost
+- Originally designed for interactive terminal sessions
+- Older protocol but still useful for testing TCP connections
+- After connecting, you can type the password and press Enter to send it
+
+The main difference is that:
+- nc is a more modern, versatile tool that can handle both TCP and UDP connections
+- telnet is an older protocol primarily designed for interactive terminal sessions
+
+In this specific challenge, either command will work because you just need to:
+- Establish a connection to port 30000
+- Send the password
+- Receive the response
+
+Think of both commands like picking up a phone (establishing a connection) to call a specific extension (port 30000) in your own building (localhost), where you'll then speak the password and get a response back.
+```
+
+okay here we go
+
+```
+bandit14@bandit:/etc/bandit_pass$ pwd
+/etc/bandit_pass
+bandit14@bandit:/etc/bandit_pass$ cat bandit14
+MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+bandit14@bandit:/etc/bandit_pass$ nc localhost 30000
+MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+Correct!
+8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+```
