@@ -457,6 +457,23 @@ If you try with nc, the server will not understand your request because it expec
 ```
 
 ```bash
+2025-05-03 Other Options
+
+- openssl s_client is the most universal and low-level tool for this.
+- ncat and socat are great alternatives if installed.
+- Scripting (Python, etc.) is useful for automation.
+- curl is only for HTTP(S) services.
+
+| Tool/Method | Command/Usage Example | Notes |
+|---------------------|-------------------------------------------------------|------------------------------|
+| openssl s_client | openssl s_client -connect localhost:30001 | Most common |
+| ncat | ncat --ssl localhost 30001 | Modern netcat with SSL |
+| socat | socat - OPENSSL:localhost:30001,verify=0 | Very flexible |
+| Python (ssl) | See script above | Good for automation |
+| curl | curl -k https://localhost:30001 | Only for HTTP(S) protocols |
+```
+
+```bash
 bandit15@bandit:~$ openssl s_client localhost:30001
 CONNECTED(00000003)
 Can't use SSL_get_servername
@@ -597,4 +614,143 @@ Correct!
 kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
 
 closed
+```
+
+## 17
+```
+https://overthewire.org/wargames/bandit/bandit17.html
+Level Goal
+The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL/TLS and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
+
+Helpful note: Getting “DONE”, “RENEGOTIATING” or “KEYUPDATE”? Read the “CONNECTED COMMANDS” section in the manpage.
+
+Commands you may need to solve this level
+ssh, telnet, nc, ncat, socat, openssl, s_client, nmap, netstat, ss
+
+Helpful Reading Material
+[Port scanner on Wikipedia](https://en.wikipedia.org/wiki/Port_scanner)
+```
+
+nmap! super powerful network mapper. used all the time in movies/media. very cool.
+
+```bash
+bandit16@bandit:~$ nmap -p 31000-32000 localhost 
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-05-03 23:26 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00015s latency).
+Not shown: 996 closed tcp ports (conn-refused)
+PORT      STATE SERVICE
+31046/tcp open  unknown
+31518/tcp open  unknown
+31691/tcp open  unknown
+31790/tcp open  unknown
+31960/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 0.11 seconds
+bandit16@bandit:~$ ncat --ssl local 31046
+test
+Ncat: Could not resolve hostname "local": Temporary failure in name resolution. QUITTING.
+bandit16@bandit:~$ test
+bandit16@bandit:~$ ncat --ssl localhost 31046
+Ncat: Input/output error.
+bandit16@bandit:~$ ncat --ssl localhost 31518
+kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+^C
+bandit16@bandit:~$ ncat --ssl localhost 31691
+Ncat: Input/output error.
+bandit16@bandit:~$ ncat --ssl localhost 31790
+kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+Correct!
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
+imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
+Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
+DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
+JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
+x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
+KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
+J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
+d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
+YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
+vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
++TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
+8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
+SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
+HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
+SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
+R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
+Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
+R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
+L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
+blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
+YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
+77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
+dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
+vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
+-----END RSA PRIVATE KEY-----
+```
+
+Other ways
+```bash
+> Is there a smarter way to do this than to brute force the ports nmap found?
+
+**Short answer:**  
+For this specific Bandit level, brute-forcing the handful of open ports is actually the intended and most practical approach, because:
+
+- The challenge is designed to teach you about port scanning and protocol detection.
+- There are only a few open ports in the range (5 in your example), so it’s not a true brute-force of thousands of ports.
+- There’s no advertised protocol or banner to distinguish the correct service without trying to connect.
+
+---
+
+## Why brute-forcing is “smart” here
+
+- **nmap** tells you which ports are open, but not which ones use SSL/TLS or which one is the “real” service.
+- The only way to know which port expects SSL/TLS and gives the next password is to try connecting (with `ncat --ssl`, `openssl s_client`, etc.) and see the response.
+- The “dumb” brute-force would be to try all 1001 ports; the “smart” brute-force is to scan, then try only the 5 open ones.
+
+---
+
+## Can you automate it?
+
+Yes! You can script the process to make it less manual. For example, here’s a bash one-liner to try all open ports with `ncat --ssl` and send the password:
+
+```bash
+for port in 31046 31518 31691 31790 31960; do
+  echo "Trying port $port"
+  echo "YOUR_PASSWORD_HERE" | ncat --ssl localhost $port
+done
+```
+Or, to automate the nmap scan and test each open port:
+
+```bash
+for port in $(nmap -p31000-32000 --open -T4 -oG - localhost | grep '/open/' | awk '{print $2}' | tr ',' '\n'); do
+  echo "Trying port $port"
+  echo "YOUR_PASSWORD_HERE" | ncat --ssl localhost $port
+done
+```
+
+---
+
+## Is there a way to distinguish the correct port without connecting?
+
+- **Not reliably.**  
+  - nmap’s service detection (`-sV`) might sometimes help, but for custom or minimal services (like in Bandit), it usually just says “unknown.”
+  - You could try banner grabbing with plain `nc` or `telnet`, but if the service expects SSL/TLS, you’ll just get gibberish or nothing.
+  - Only by actually connecting with SSL/TLS and sending the password will you know for sure.
+
+---
+
+## Summary
+
+- **Brute-forcing** the small set of open ports is the intended and most efficient approach for this challenge.
+- You can automate it with a script to make it less tedious.
+- There’s no “smarter” way in the sense of avoiding trying each port, unless the service gives away a unique banner (which it doesn’t here).
+
+**In real-world scenarios, you might use more advanced fingerprinting, but for Bandit, this is the right approach!**
+
+Let me know if you want a ready-to-use script for this!
 ```
