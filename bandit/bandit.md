@@ -86,7 +86,7 @@ The password for the next level is stored in a file somewhere under the inhere d
 human-readable
 1033 bytes in size
 not executable
-```
+```bash
 - `find ~/inhere -type f -size 1033c`
 ```
 what other options are there for the "c" in -size 1033c?
@@ -98,7 +98,8 @@ G for gigabytes
 b for 512-byte blocks (default if no suffix)
 w for 2-byte words
 ```
-```
+
+```bash
 bandit5@bandit:~/inhere$ find ~/inhere -type f -size 1033c
 /home/bandit5/inhere/maybehere07/.file2
 bandit5@bandit:~/inhere$ cat /home/bandit5/inhere/maybehere07/.file2
@@ -114,7 +115,7 @@ owned by user bandit7
 owned by group bandit6
 33 bytes in size
 ```
-```
+```bash
 % find / -type f -user bandit7 -group bandit6 -size 33c 2> /dev/null
 /var/lib/dpkg/info/bandit7.password
 % cat /var/lib/dpkg/info/bandit7.password
@@ -127,7 +128,7 @@ https://overthewire.org/wargames/bandit/bandit8.html
 ```
 The password for the next level is stored in the file data.txt next to the word millionth
 ```
-```
+```bash
 % grep millionth data.txt 
 millionth       dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
 ```
@@ -138,7 +139,7 @@ https://overthewire.org/wargames/bandit/bandit9.html
 The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
 ```
 - tried `cat data.txt | uniq -u` first, but didn't work. This is because `uniq` only removes consecutive duplicate lines. If duplicate lines are not adjacent, `uniq` won't consider them duplicates. To make sure identical lines are next to each other, `sort` the file first.
-```
+```bash
 % sort data.txt | uniq -u
 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
 ```
@@ -165,7 +166,7 @@ Adjust the number of '=' in your grep pattern to suit the expected number of pre
 
 The caret (^) in a grep search pattern is used as an anchor to match the beginning of the line. When you write `grep '^==='` it tells `grep` to only look for lines that start with "===", rather than matching "===" anywhere within the line. This is useful if you're trying to extract or filter lines that have a specific format where the characters should appear at the start.
 
-```
+```bash
 % strings data.txt | grep "=="
 ========== the
 ========== password{k
@@ -178,7 +179,7 @@ https://overthewire.org/wargames/bandit/bandit11.html
 ```
 The password for the next level is stored in the file data.txt, which contains base64 encoded data
 ```
-```
+```bash
 % base64 -d data.txt
 The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
 ```
@@ -190,10 +191,11 @@ The password for the next level is stored in the file data.txt, where all
 lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
 ```
 - use `tr` to handle char rotation
-```
+```bash
 % cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
 The password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
-
+```
+```
 --
 ROT13 Character Mapping
 'A-Za-z' represents the input character set (all letters A to Z, both uppercase and lowercase)
@@ -224,7 +226,7 @@ DESCRIPTION
               mation and without a particular column layout. Additional whitespace and line breaks are  allowed  anywhere.  Use
               the combination -r -b to read a bits dump instead of a hex dump.
 
-```
+```bash
 bandit12@bandit:/tmp/tmp.MbsFdVhoZU$ cat data.txt 
 00000000: 1f8b 0808 41d4 f767 0203 6461 7461 322e  ....A..g..data2.
 00000010: 6269 6e00 0149 02b6 fd42 5a68 3931 4159  bin..I...BZh91AY
@@ -268,7 +270,7 @@ bandit12@bandit:/tmp/tmp.MbsFdVhoZU$ cat data.txt
 ```
 
 hex > binary
-```
+```bash
 bandit12@bandit:/tmp/tmp.MbsFdVhoZU$ xxd -r data.txt 
 4 4��hH��D0UP�k�.�"˟�����D�p�QG�l��J��΄�x Fc������޺�����߰;���4�
 ��px��[�h���oFw9 D���9A���\Ѽ-�1�l�N�(^�@Z@T!��I2_=pi@�����(,Q�I��/bݐ'�y��R�
@@ -280,7 +282,7 @@ bandit12@bandit:/tmp/tmp.MbsFdVhoZU$ xxd -r data.txt
 
 now to uncompress... gzip? bzip2? tar? checking man pages
 
-```
+```bash
 bandit12@bandit:/tmp/tmp.MbsFdVhoZU$ xxd -r data.txt > output.bin
 bandit12@bandit:/tmp/tmp.MbsFdVhoZU$ ls
 data.txt  output.bin  -r
@@ -296,14 +298,14 @@ A��gdata2.binI��BZh91AY&SY�����������~����
 
 you can find out useful information about a file with `file`
 
-```
+```bash
 bandit12@bandit:/tmp/tmp.MbsFdVhoZU$ file output.bin
 output.bin: gzip compressed data, was "data2.bin", last modified: Thu Apr 10 14:22:57 2025, max compression, from Unix, original size modulo 2^32 585
 ```
 
 so gzip
 
-```
+```bash
 bandit12@bandit:/tmp/tmp.MbsFdVhoZU$ gzip -d output.bin
 gzip: output.bin: unknown suffix -- ignored
 ```
@@ -315,7 +317,7 @@ wow, that was like 8 layers deep of `gzip -d`, `bzip2 -d`, `tar xvf`. Each step 
 
 here is the work: https://gist.github.com/achao-io/4e14b332f67d80a12a612e6329d0bb1f
 
-```
+```bash
 bandit12@bandit:/tmp/tmp.MbsFdVhoZU$ file data8.bin
 data8.bin: ASCII text
 bandit12@bandit:/tmp/tmp.MbsFdVhoZU$ cat data8.bin
@@ -347,7 +349,7 @@ nmap
         Selects  a file from which the identity (private key) for public key authentication is read.  You can also spec‐ify a public key file to use the corresponding private key that is loaded in ssh-agent(1) when the  private  key file   is   not   present   locally.    The   default  is  ~/.ssh/id_rsa,  ~/.ssh/id_ecdsa,  ~/.ssh/id_ecdsa_sk, ~/.ssh/id_ed25519, ~/.ssh/id_ed25519_sk and ~/.ssh/id_dsa.  Identity files may also be specified on  a  per-host basis  in the configuration file.  It is possible to have multiple -i options (and multiple identities specified in configuration files).  If no certificates have been explicitly specified by  the  CertificateFile  directive, ssh  will also try to load certificate information from the filename obtained by appending -cert.pub to identity
         filenames.
 
-```
+```bash
 bandit13@bandit:~$ ssh bandit.labs.overthewire.org -l bandit14 -p 2220 -i sshkey.private
 ```
 
@@ -357,7 +359,7 @@ https://overthewire.org/wargames/bandit/bandit15.html
 Level Goal
 The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
 ```
-```
+```bash
 bandit14@bandit:/etc/bandit_pass$ pwd
 /etc/bandit_pass
 bandit14@bandit:/etc/bandit_pass$ cat bandit14
@@ -369,7 +371,7 @@ what does it mean to "submit the password to port 30000 on localhost"? foreign t
 Analogy from Cursor: "Think of it like knocking on a specific door (port 30000) of your house (localhost) and saying a password to get a response back."
 
 
-```
+```bash
 nc localhost 30000
 telnet localhost 30000
 ```
@@ -406,7 +408,7 @@ Think of both commands like picking up a phone (establishing a connection) to ca
 
 okay here we go
 
-```
+```bash
 bandit14@bandit:/etc/bandit_pass$ pwd
 /etc/bandit_pass
 bandit14@bandit:/etc/bandit_pass$ cat bandit14
@@ -415,4 +417,184 @@ bandit14@bandit:/etc/bandit_pass$ nc localhost 30000
 MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
 Correct!
 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+```
+
+## 16
+https://overthewire.org/wargames/bandit/bandit16.html
+```
+Level Goal
+The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL/TLS encryption.
+
+Helpful note: Getting “DONE”, “RENEGOTIATING” or “KEYUPDATE”? Read the “CONNECTED COMMANDS” section in the manpage.
+
+Commands you may need to solve this level
+ssh, telnet, nc, ncat, socat, openssl, s_client, nmap, netstat, ss
+
+Helpful Reading Material
+[Secure Socket Layer/Transport Layer Security on Wikipedia](https://en.wikipedia.org/wiki/Transport_Layer_Security)
+[OpenSSL Cookbook - Testing with OpenSSL](https://www.feistyduck.com/library/openssl-cookbook/online/testing-with-openssl/index.html)
+```
+
+can I do it with just `nc`?
+
+```
+No, you cannot use plain nc (netcat) for this task, because nc only creates unencrypted (plain TCP) connections. The challenge specifically requires you to use SSL/TLS encryption to connect to port 30001.
+
+To connect using SSL/TLS, you should use a tool that supports encrypted connections, such as:
+- openssl s_client
+- ncat (with the --ssl option, if available)
+- socat (with appropriate options)
+The most common and portable way is:
+
+% openssl s_client -connect localhost:30001
+
+Then, once connected, paste or type the password and press Enter.
+
+Summary:
+- nc = plain, unencrypted TCP (not suitable for SSL/TLS)
+- openssl s_client = encrypted SSL/TLS connection (what you need here)
+If you try with nc, the server will not understand your request because it expects an encrypted handshake, not plain text. 
+```
+
+```bash
+bandit15@bandit:~$ openssl s_client localhost:30001
+CONNECTED(00000003)
+Can't use SSL_get_servername
+depth=0 CN = SnakeOil
+verify error:num=18:self-signed certificate
+verify return:1
+depth=0 CN = SnakeOil
+verify return:1
+---
+Certificate chain
+ 0 s:CN = SnakeOil
+   i:CN = SnakeOil
+   a:PKEY: rsaEncryption, 4096 (bit); sigalg: RSA-SHA256
+   v:NotBefore: Jun 10 03:59:50 2024 GMT; NotAfter: Jun  8 03:59:50 2034 GMT
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIFBzCCAu+gAwIBAgIUBLz7DBxA0IfojaL/WaJzE6Sbz7cwDQYJKoZIhvcNAQEL
+BQAwEzERMA8GA1UEAwwIU25ha2VPaWwwHhcNMjQwNjEwMDM1OTUwWhcNMzQwNjA4
+MDM1OTUwWjATMREwDwYDVQQDDAhTbmFrZU9pbDCCAiIwDQYJKoZIhvcNAQEBBQAD
+ggIPADCCAgoCggIBANI+P5QXm9Bj21FIPsQqbqZRb5XmSZZJYaam7EIJ16Fxedf+
+jXAv4d/FVqiEM4BuSNsNMeBMx2Gq0lAfN33h+RMTjRoMb8yBsZsC063MLfXCk4p+
+09gtGP7BS6Iy5XdmfY/fPHvA3JDEScdlDDmd6Lsbdwhv93Q8M6POVO9sv4HuS4t/
+jEjr+NhE+Bjr/wDbyg7GL71BP1WPZpQnRE4OzoSrt5+bZVLvODWUFwinB0fLaGRk
+GmI0r5EUOUd7HpYyoIQbiNlePGfPpHRKnmdXTTEZEoxeWWAaM1VhPGqfrB/Pnca+
+vAJX7iBOb3kHinmfVOScsG/YAUR94wSELeY+UlEWJaELVUntrJ5HeRDiTChiVQ++
+wnnjNbepaW6shopybUF3XXfhIb4NvwLWpvoKFXVtcVjlOujF0snVvpE+MRT0wacy
+tHtjZs7Ao7GYxDz6H8AdBLKJW67uQon37a4MI260ADFMS+2vEAbNSFP+f6ii5mrB
+18cY64ZaF6oU8bjGK7BArDx56bRc3WFyuBIGWAFHEuB948BcshXY7baf5jjzPmgz
+mq1zdRthQB31MOM2ii6vuTkheAvKfFf+llH4M9SnES4NSF2hj9NnHga9V08wfhYc
+x0W6qu+S8HUdVF+V23yTvUNgz4Q+UoGs4sHSDEsIBFqNvInnpUmtNgcR2L5PAgMB
+AAGjUzBRMB0GA1UdDgQWBBTPo8kfze4P9EgxNuyk7+xDGFtAYzAfBgNVHSMEGDAW
+gBTPo8kfze4P9EgxNuyk7+xDGFtAYzAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3
+DQEBCwUAA4ICAQAKHomtmcGqyiLnhziLe97Mq2+Sul5QgYVwfx/KYOXxv2T8ZmcR
+Ae9XFhZT4jsAOUDK1OXx9aZgDGJHJLNEVTe9zWv1ONFfNxEBxQgP7hhmDBWdtj6d
+taqEW/Jp06X+08BtnYK9NZsvDg2YRcvOHConeMjwvEL7tQK0m+GVyQfLYg6jnrhx
+egH+abucTKxabFcWSE+Vk0uJYMqcbXvB4WNKz9vj4V5Hn7/DN4xIjFko+nREw6Oa
+/AUFjNnO/FPjap+d68H1LdzMH3PSs+yjGid+6Zx9FCnt9qZydW13Miqg3nDnODXw
++Z682mQFjVlGPCA5ZOQbyMKY4tNazG2n8qy2famQT3+jF8Lb6a4NGbnpeWnLMkIu
+jWLWIkA9MlbdNXuajiPNVyYIK9gdoBzbfaKwoOfSsLxEqlf8rio1GGcEV5Hlz5S2
+txwI0xdW9MWeGWoiLbZSbRJH4TIBFFtoBG0LoEJi0C+UPwS8CDngJB4TyrZqEld3
+rH87W+Et1t/Nepoc/Eoaux9PFp5VPXP+qwQGmhir/hv7OsgBhrkYuhkjxZ8+1uk7
+tUWC/XM0mpLoxsq6vVl3AJaJe1ivdA9xLytsuG4iv02Juc593HXYR8yOpow0Eq2T
+U5EyeuFg5RXYwAPi7ykw1PW7zAPL4MlonEVz+QXOSx6eyhimp1VZC11SCg==
+-----END CERTIFICATE-----
+subject=CN = SnakeOil
+issuer=CN = SnakeOil
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 2103 bytes and written 373 bytes
+Verification error: self-signed certificate
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 4096 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 18 (self-signed certificate)
+---
+---
+Post-Handshake New Session Ticket arrived:
+SSL-Session:
+    Protocol  : TLSv1.3
+    Cipher    : TLS_AES_256_GCM_SHA384
+    Session-ID: 266436B3C1C32EEAB434045CC80CBA16021CE6C475D32BB653957E1BC9126745
+    Session-ID-ctx: 
+    Resumption PSK: A1EF6E99FBD612041625CF6D517A8FFC6B69C2A2DEE130465B4FC948D600F6B29E0B3B2B2EF64E96FB4985AC1F2757EC
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 300 (seconds)
+    TLS session ticket:
+    0000 - 14 8e 4f dd d3 b0 a2 87-64 84 21 86 93 29 46 0d   ..O.....d.!..)F.
+    0010 - 37 a6 2a 47 8a 70 9b 9e-a6 7c a2 1e ca 11 09 4d   7.*G.p...|.....M
+    0020 - 85 73 27 13 32 e6 68 59-e7 9f 8c 94 69 70 4d 01   .s'.2.hY....ipM.
+    0030 - a3 bd 76 be 20 a3 be 56-23 24 12 e6 91 e8 d9 b9   ..v. ..V#$......
+    0040 - f6 71 72 27 bd 2e 4a bb-2e 3d f5 36 33 d8 de 91   .qr'..J..=.63...
+    0050 - 75 7f e7 b1 c8 ac 5d c3-a5 d8 16 df c4 3e 9a 07   u.....]......>..
+    0060 - 41 fa 91 7c c7 bb 08 37-40 c6 d4 81 96 20 a9 23   A..|...7@.... .#
+    0070 - 9d 82 e9 8e a2 ec 43 69-1a 79 56 e7 89 4c 88 45   ......Ci.yV..L.E
+    0080 - b8 1e d6 63 d5 a6 68 13-18 50 6c 9b 77 3e e2 80   ...c..h..Pl.w>..
+    0090 - 3b 9f 3a 35 df ad 9e c1-1e 50 72 f6 c3 36 37 25   ;.:5.....Pr..67%
+    00a0 - fc bd 61 77 48 29 fc a1-0d 79 f9 ef 1f 5c 32 cb   ..awH)...y...\2.
+    00b0 - 84 8a 5b 38 00 7f f3 92-5b 78 6d 38 07 9f fd 3f   ..[8....[xm8...?
+    00c0 - 01 36 07 fb db ff 5b d5-eb 64 f1 04 6d bd ae d7   .6....[..d..m...
+    00d0 - ba 5c cf 75 4b c6 8c 98-c0 9f a9 39 fc 33 1c 42   .\.uK......9.3.B
+
+    Start Time: 1746240452
+    Timeout   : 7200 (sec)
+    Verify return code: 18 (self-signed certificate)
+    Extended master secret: no
+    Max Early Data: 0
+---
+read R BLOCK
+---
+Post-Handshake New Session Ticket arrived:
+SSL-Session:
+    Protocol  : TLSv1.3
+    Cipher    : TLS_AES_256_GCM_SHA384
+    Session-ID: 8D9792C62713DE60BAE7F50ECFA0851728DF197032EE8AFB0A783534682C3D48
+    Session-ID-ctx: 
+    Resumption PSK: 7EEE828704F4171BA10F31511D49345142CE071818B3EF055CC8615D61387DAAD77E9B04EA7527DEBA459F0C3DADD0F6
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 300 (seconds)
+    TLS session ticket:
+    0000 - 14 8e 4f dd d3 b0 a2 87-64 84 21 86 93 29 46 0d   ..O.....d.!..)F.
+    0010 - 4e f1 a2 b4 2f 01 a7 39-d6 f4 4a 92 8e cf cc b0   N.../..9..J.....
+    0020 - 47 3c 14 65 6a d7 ba 72-87 c2 4e e3 1f 30 43 d1   G<.ej..r..N..0C.
+    0030 - 5c 2b e5 35 5b b4 44 b4-33 f6 74 07 4c d0 3c 0d   \+.5[.D.3.t.L.<.
+    0040 - c7 b6 ce a6 98 43 f7 75-81 ed 4f 09 2e 62 ff f4   .....C.u..O..b..
+    0050 - 2e bb ee 8a 4b 78 84 75-f1 1e fd 90 cd 81 35 7e   ....Kx.u......5~
+    0060 - 0a 75 ab 8a 79 26 f7 c0-5b 0e 3b c0 2b 0b 4d 64   .u..y&..[.;.+.Md
+    0070 - f1 68 46 83 c8 e3 5d 39-26 47 a5 4d ba b8 74 64   .hF...]9&G.M..td
+    0080 - 3e 40 27 ed 49 06 61 51-d0 6e f7 b6 97 0a 02 18   >@'.I.aQ.n......
+    0090 - 91 a0 dd aa 77 7f d0 3e-19 05 a0 b3 46 43 8e f2   ....w..>....FC..
+    00a0 - d3 f2 bf 5e 7a 62 52 44-62 2c c8 5c 95 f1 17 8d   ...^zbRDb,.\....
+    00b0 - 02 19 86 0d 88 2c ec 0c-4b 29 6a e4 02 43 a4 72   .....,..K)j..C.r
+    00c0 - 7c 20 38 76 f7 1b 5f 26-b8 53 d1 29 a1 82 3d d3   | 8v.._&.S.)..=.
+    00d0 - e4 b2 d9 e3 e1 87 f9 32-3e b5 16 4c 6d 1d 48 74   .......2>..Lm.Ht
+
+    Start Time: 1746240452
+    Timeout   : 7200 (sec)
+    Verify return code: 18 (self-signed certificate)
+    Extended master secret: no
+    Max Early Data: 0
+---
+read R BLOCK
+8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+Correct!
+kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+
+closed
 ```
