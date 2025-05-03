@@ -631,7 +631,7 @@ Helpful Reading Material
 [Port scanner on Wikipedia](https://en.wikipedia.org/wiki/Port_scanner)
 ```
 
-nmap! super powerful network mapper. used all the time in movies/media. very cool.
+[nmap](https://nmap.org/)! super powerful network mapper. used all the time in movies/media. very cool.
 
 ```bash
 bandit16@bandit:~$ nmap -p 31000-32000 localhost 
@@ -693,8 +693,6 @@ vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
 -----END RSA PRIVATE KEY-----
 ```
 
-Other ways
-```bash
 > Is there a smarter way to do this than to brute force the ports nmap found?
 
 **Short answer:**  
@@ -751,6 +749,3 @@ done
 - There’s no “smarter” way in the sense of avoiding trying each port, unless the service gives away a unique banner (which it doesn’t here).
 
 **In real-world scenarios, you might use more advanced fingerprinting, but for Bandit, this is the right approach!**
-
-Let me know if you want a ready-to-use script for this!
-```
