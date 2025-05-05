@@ -749,3 +749,61 @@ done
 - There’s no “smarter” way in the sense of avoiding trying each port, unless the service gives away a unique banner (which it doesn’t here).
 
 **In real-world scenarios, you might use more advanced fingerprinting, but for Bandit, this is the right approach!**
+
+---
+
+How can I use the RSA Private Key to get to the next level?
+
+Something like bandit 13->14
+```
+bandit13@bandit:~$ ssh bandit.labs.overthewire.org -l bandit14 -p 2220 -i sshkey.private
+```
+
+`mktemp`!
+```
+Create  a temporary file or directory, safely, and
+       print its name.  TEMPLATE must contain at least  3
+       consecutive  'X's  in last component.  If TEMPLATE
+       is not specified, use tmp.XXXXXXXXXX, and --tmpdir
+       is implied.  Files are created u+rw, and  directo‐
+       ries u+rwx, minus umask restrictions.
+```
+
+```
+bandit16@bandit:~$ mktemp
+/tmp/tmp.qkTYdDP8Ff
+bandit16@bandit:~$ man mktemp
+bandit16@bandit:~$ vim /tmp/tmp.qkTYdDP8Ff
+bandit16@bandit:~$ ssh -i /tmp/tmp.qkTYdDP8Ff bandit17@bandit.labs.overthewire.org -p 2220
+```
+
+Got in!
+
+## 18
+https://overthewire.org/wargames/bandit/bandit18.html
+```
+Level Goal
+There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
+
+NOTE: if you have solved this level and see ‘Byebye!’ when trying to log into bandit18, this is related to the next level, bandit19
+
+Commands you may need to solve this level
+cat, grep, ls, diff
+```
+
+```bash
+bandit17@bandit:~$ l
+passwords.new  passwords.old
+bandit17@bandit:~$ ls
+passwords.new  passwords.old
+bandit17@bandit:~$ diff passwords.new passwords.old 
+42c42
+< x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+---
+> C6XNBdYOkgt5ARXESMKWWOUwBeaIQZ0Y
+bandit17@bandit:~$ diff passwords.old passwords.new
+42c42
+< C6XNBdYOkgt5ARXESMKWWOUwBeaIQZ0Y
+---
+> x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+```
