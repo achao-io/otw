@@ -836,3 +836,63 @@ otw git:(main) ✗ ssh bandit.labs.overthewire.org -l bandit18 -p 2220 "cat read
 bandit18@bandit.labs.overthewire.org's password: 
 cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
 ```
+
+## 20
+https://overthewire.org/wargames/bandit/bandit20.html
+```
+Level Goal
+To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
+```
+
+https://en.wikipedia.org/wiki/Setuid
+
+What is  `setuid`? (set user identity)
+- It's similar to `sudo` and used to run commands with elevated privileges.
+
+```
+setuid
+What is it?
+A special permission bit on executable files in Unix/Linux systems.
+How does it work?
+When a setuid program is run, it executes with the privileges of the file’s owner (often root or another user), not the user who launched it.
+How is it set?
+With chmod u+s filename (the s in the permissions, e.g., -rwsr-xr-x).
+Example:
+The passwd command is setuid root, so any user can change their password (which requires writing to /etc/shadow).
+Security:
+Can be risky if the program is not carefully written, as it can be exploited to gain unauthorized access.
+
+sudo
+What is it?
+A command that allows permitted users to run specific commands as another user (usually root), as defined in the /etc/sudoers file.
+How does it work?
+You type sudo <command>, and if you’re authorized, the command runs with elevated privileges (often after you enter your password).
+How is it configured?
+By system administrators in the /etc/sudoers file, which controls who can run what as whom.
+Example:
+sudo apt update runs the update command as root.
+Security:
+More flexible and auditable than setuid. Logs usage, can restrict commands, and can require authentication.
+Are they related?
+Both allow running commands with different privileges than the current user.
+setuid is a file permission mechanism; sudo is a program and a policy system.
+sudo does not use setuid on the target command; instead, the sudo binary itself is setuid root, and it manages privilege escalation internally.
+```
+
+```bash
+bandit19@bandit:~$ ls
+bandit20-do
+bandit19@bandit:~$ pwd
+/home/bandit19
+bandit19@bandit:~$ ls
+bandit20-do
+bandit19@bandit:~$ file ./bandit20-do 
+./bandit20-do: setuid ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=35d353cf6d732f515a73f50ed205265fe1e68f90, for GNU/Linux 3.2.0, not stripped
+bandit19@bandit:~$ ./bandit20-do 
+Run a command as another user.
+  Example: ./bandit20-do id
+bandit19@bandit:~$ ./bandit20-do id
+uid=11019(bandit19) gid=11019(bandit19) euid=11020(bandit20) groups=11019(bandit19)
+bandit19@bandit:~$ ./bandit20-do euid=11020 cat /etc/bandit_pass/bandit20
+0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
+```
