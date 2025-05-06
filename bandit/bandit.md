@@ -807,3 +807,32 @@ bandit17@bandit:~$ diff passwords.old passwords.new
 ---
 > x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
 ```
+
+## 19
+https://overthewire.org/wargames/bandit/bandit19.html
+```
+Level Goal
+
+The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+
+Commands you may need to solve this level
+ssh, ls, cat
+```
+
+TIL: You can run a single command on a remote server via SSH without starting an interactive shell.
+
+```bash
+otw git:(main) ✗ ssh bandit.labs.overthewire.org -l bandit18 -p 2220 "cat readme"
+                         _                     _ _ _   
+                        | |__   __ _ _ __   __| (_) |_ 
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_ 
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+                                                       
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+bandit18@bandit.labs.overthewire.org's password: 
+cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+```
