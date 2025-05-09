@@ -919,3 +919,35 @@ EeoULMCra2q0dSkYj561DX7s1CpBuOBt
 [1]+  Done                    echo -n "0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO" | nc -l -p 12345
 ```
 - https://mayadevbe.me/posts/overthewire/bandit/level21/
+
+## 22
+https://overthewire.org/wargames/bandit/bandit22.html
+```
+Level Goal
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+Commands you may need to solve this level
+cron, crontab, crontab(5) (use “man 5 crontab” to access this)
+```
+
+https://mayadevbe.me/posts/overthewire/bandit/level22/
+
+Look at `/etc/cron.d` for what is running
+`cat` /usr/bin/cronjob_bandit22.sh
+...
+
+I'll flesh this out tomorrow. My brain is dead.
+
+```
+bandit21@bandit:~$ ls /etc/cron.d
+clean_tmp  cronjob_bandit22  cronjob_bandit23  cronjob_bandit24  e2scrub_all  otw-tmp-dir  sysstat
+bandit21@bandit:~$ cat /etc/cron.d/cronjob_bandit22
+@reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+* * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+bandit21@bandit:~$ cat /usr/bin/cronjob_bandit22.sh
+#!/bin/bash
+chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+bandit21@bandit:~$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+tRae0UfB9v0UzbCdn9cY0gQnds9GF58Q
+```
