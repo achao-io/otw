@@ -937,6 +937,7 @@ Look at `/etc/cron.d` for what is running
 ...
 
 I'll flesh this out tomorrow. My brain is dead.
+It's tomorrow brain is still dead and it is 11:36 PM. Oof.
 
 ```
 bandit21@bandit:~$ ls /etc/cron.d
