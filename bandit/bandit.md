@@ -988,3 +988,19 @@ bandit22@bandit:~$ echo I am user $myname | md5sum | cut -d ' ' -f 1
 bandit22@bandit:~$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
 0Zf11ioIjMVN551jX3CmStKLYqjk54Ga
 ```
+
+## 24
+https://overthewire.org/wargames/bandit/bandit24.html
+```
+Level Goal
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+NOTE: This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!
+
+NOTE 2: Keep in mind that your shell script is removed once executed, so you may want to keep a copy around…
+
+Commands you may need to solve this level
+chmod, cron, crontab, crontab(5) (use “man 5 crontab” to access this)
+```
+https://mayadevbe.me/posts/overthewire/bandit/level24/
+https://gist.github.com/achao-io/9155271f13f327e107a3b7b4d52c9e21
