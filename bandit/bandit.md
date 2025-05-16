@@ -1079,3 +1079,71 @@ ls
 upsNCc7vzaRDx6oZC6GiR6ERwe1MowGB
 ```
 
+## 28
+https://overthewire.org/wargames/bandit/bandit28.html
+```
+Level Goal
+There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo via the port 2220. The password for the user bandit27-git is the same as for the user bandit27.
+
+Clone the repository and find the password for the next level.
+
+Commands you may need to solve this level
+git
+```
+```bash
+bandit27@bandit:~$ cd /tmp/tmp.eSXvL0jJFp
+bandit27@bandit:/tmp/tmp.eSXvL0jJFp$ git clone ssh://bandit27-git@localhost/home/bandit27-git/repo
+Cloning into 'repo'...
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ED25519 key fingerprint is SHA256:C2ihUBV7ihnV1wUXRb4RrEcLfXC5CXlhmAAM/urerLY.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Could not create directory '/home/bandit27/.ssh' (Permission denied).
+Failed to add the host to the list of known hosts (/home/bandit27/.ssh/known_hosts).
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+!!! You are trying to log into this SSH server on port 22, which is not intended.
+
+bandit27-git@localhost: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+bandit27@bandit:/tmp/tmp.eSXvL0jJFp$ ls
+bandit27@bandit:/tmp/tmp.eSXvL0jJFp$ git clone ssh://bandit27-git@localhost:2220/home/bandit27-git/repo
+Cloning into 'repo'...
+The authenticity of host '[localhost]:2220 ([127.0.0.1]:2220)' can't be established.
+ED25519 key fingerprint is SHA256:C2ihUBV7ihnV1wUXRb4RrEcLfXC5CXlhmAAM/urerLY.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Could not create directory '/home/bandit27/.ssh' (Permission denied).
+Failed to add the host to the list of known hosts (/home/bandit27/.ssh/known_hosts).
+                         _                     _ _ _   
+                        | |__   __ _ _ __   __| (_) |_ 
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_ 
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+                                                       
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+bandit27-git@localhost's password: 
+Permission denied, please try again.
+bandit27-git@localhost's password: 
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (2/2), done.
+Receiving objects: 100% (3/3), 288 bytes | 288.00 KiB/s, done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+bandit27@bandit:/tmp/tmp.eSXvL0jJFp$ ls
+repo
+bandit27@bandit:/tmp/tmp.eSXvL0jJFp$ cd repo
+bandit27@bandit:/tmp/tmp.eSXvL0jJFp/repo$ ls -lh
+total 4.0K
+-rw-rw-r-- 1 bandit27 bandit27 68 May 16 22:22 README
+bandit27@bandit:/tmp/tmp.eSXvL0jJFp/repo$ cat README 
+The password to the next level is: Yz9IpL0sBcCeuG7m9uQFt8ZNpS4HZRcN
+```
