@@ -1057,3 +1057,25 @@ Holy, this one was crazy.
 `v`
 `:e /etc/bandit_pass/bandit26`
 s0773xxkk0MXfdqOfPRVr9L3jJBUOgCZ
+
+## 27
+https://overthewire.org/wargames/bandit/bandit27.html
+```
+Level Goal
+Good job getting a shell! Now hurry and grab the password for bandit27!
+
+Commands you may need to solve this level
+ls
+```
+```
+make window tiny, to trigger `more`
+ssh bandit.labs.overthewire.org -l bandit26 -p 2220
+s0773xxkk0MXfdqOfPRVr9L3jJBUOgCZ
+v
+:set shell=/bin/bash
+:shell (you can access a shell inside Vim!)
+ls
+./bandit27-do cat /etc/bandit_pass/bandit27
+upsNCc7vzaRDx6oZC6GiR6ERwe1MowGB
+```
+
