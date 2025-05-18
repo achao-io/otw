@@ -1334,3 +1334,43 @@ Some notes for bandit30 of bandit.
 - username: bandit30
 - password: qp30ex3VLz5MDG1n91YowTv4Q8l7CDZL
 ```
+
+## 31
+https://overthewire.org/wargames/bandit/bandit31.html
+```
+Level Goal
+There is a git repository at ssh://bandit30-git@localhost/home/bandit30-git/repo via the port 2220. The password for the user bandit30-git is the same as for the user bandit30.
+
+Clone the repository and find the password for the next level.
+
+Commands you may need to solve this level
+git
+```
+
+```bash
+bandit30@bandit:~$ mktemp -d
+/tmp/tmp.GRYqNuV23E
+bandit30@bandit:~$ cd /tmp/tmp.GRYqNuV23E
+bandit30@bandit:/tmp/tmp.GRYqNuV23E$ git clone ssh://bandit30-git@localhost:2220/home/bandit30-git/repo
+bandit30@bandit:/tmp/tmp.GRYqNuV23E$ ls
+repo
+bandit30@bandit:/tmp/tmp.GRYqNuV23E$ cd repo
+bandit30@bandit:/tmp/tmp.GRYqNuV23E/repo$ ls
+README.md
+bandit30@bandit:/tmp/tmp.GRYqNuV23E/repo$ cat README.md 
+just an epmty file... muahaha
+bandit30@bandit:/tmp/tmp.GRYqNuV23E/repo$ git tags
+git: 'tags' is not a git command. See 'git --help'.
+
+The most similar commands are
+	stage
+	tag
+bandit30@bandit:/tmp/tmp.GRYqNuV23E/repo$ git tag
+secret
+bandit30@bandit:/tmp/tmp.GRYqNuV23E/repo$ git checkout secret
+fatal: reference is not a tree: secret
+bandit30@bandit:/tmp/tmp.GRYqNuV23E/repo$ git tag secret
+fatal: tag 'secret' already exists
+bandit30@bandit:/tmp/tmp.GRYqNuV23E/repo$ git show secret
+fb5S2xb7bRyFmAvQYQGEqsbhVyJqhnDy
+```
