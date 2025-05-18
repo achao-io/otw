@@ -1261,3 +1261,76 @@ Some notes for level29 of bandit.
 
 bandit28@bandit:/tmp/tmp.xHLs5ADHH7/repo$
 ```
+
+## 30
+https://overthewire.org/wargames/bandit/bandit30.html
+```
+Level Goal
+There is a git repository at ssh://bandit29-git@localhost/home/bandit29-git/repo via the port 2220. The password for the user bandit29-git is the same as for the user bandit29.
+
+Clone the repository and find the password for the next level.
+
+Commands you may need to solve this level
+git
+```
+
+```bash
+% ssh bandit.labs.overthewire.org -l bandit29 -p 2220
+bandit29@bandit:~$ mktemp -d
+/tmp/tmp.7O5jQ2xRjR
+bandit29@bandit:~$ cd /tmp/tmp.7O5jQ2xRjR
+bandit29@bandit:/tmp/tmp.7O5jQ2xRjR$ git clone ssh://bandit29-git@localhost:2220/home/bandit29-git/repo
+bandit29@bandit:/tmp/tmp.7O5jQ2xRjR/repo$ cat README.md 
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: <no passwords in production!>
+
+bandit29@bandit:/tmp/tmp.7O5jQ2xRjR/repo$ git branch -r
+  origin/HEAD -> origin/master
+  origin/dev
+  origin/master
+  origin/sploits-dev
+bandit29@bandit:/tmp/tmp.7O5jQ2xRjR/repo$ git checkout dev
+branch 'dev' set up to track 'origin/dev'.
+Switched to a new branch 'dev'
+bandit29@bandit:/tmp/tmp.7O5jQ2xRjR/repo$ git log
+commit a97d0dbf8fd910ead6fcf648829ff55c1a629c8e (HEAD -> dev, origin/dev)
+Author: Morla Porla <morla@overthewire.org>
+Date:   Thu Apr 10 14:23:21 2025 +0000
+
+    add data needed for development
+
+commit 3910630172946c9ffb75842922e394b772c672bd
+Author: Ben Dover <noone@overthewire.org>
+Date:   Thu Apr 10 14:23:21 2025 +0000
+
+    add gif2ascii
+
+commit 3b8b91fc3c48f1a19d05670fd45d3e3f2621fcfa (origin/master, origin/HEAD, master)
+Author: Ben Dover <noone@overthewire.org>
+Date:   Thu Apr 10 14:23:21 2025 +0000
+
+    fix username
+
+commit 8d2ffeb5e45f87d0abb028aa796e3ebb63c5579c
+Author: Ben Dover <noone@overthewire.org>
+Date:   Thu Apr 10 14:23:21 2025 +0000
+
+    initial commit of README.md
+
+bandit29@bandit:/tmp/tmp.7O5jQ2xRjR/repo$ git checkout a97d0dbf8fd910ead6fcf648829ff55c1a629c8e
+Previous HEAD position was 3910630 add gif2ascii
+HEAD is now at a97d0db add data needed for development
+bandit29@bandit:/tmp/tmp.7O5jQ2xRjR/repo$ cat README.md 
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: qp30ex3VLz5MDG1n91YowTv4Q8l7CDZL
+```
