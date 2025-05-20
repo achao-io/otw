@@ -1471,3 +1471,19 @@ To ssh://localhost:2220/home/bandit31-git/repo
  ! [remote rejected] master -> master (pre-receive hook declined)
 error: failed to push some refs to 'ssh://localhost:2220/home/bandit31-git/repo'
 ```
+
+## 33
+https://overthewire.org/wargames/bandit/bandit33.html
+```
+Level Goal
+After all this git stuff, it’s time for another escape. Good luck!
+
+Commands you may need to solve this level
+sh, man
+```
+Key is to realize you can spawn a new shell by typing `$0`
+```bash
+$ $0
+$ cat /etc/bandit_pass/bandit33
+tQdtbs5D5i2vJwkO8mEyYEyTL8izoeJ0
+```
