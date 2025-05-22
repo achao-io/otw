@@ -53,3 +53,39 @@ leviathan0@gibson:~/.backup$ grep leviathan bookmarks.html
 <DT><A HREF="http://leviathan.labs.overthewire.org/passwordus.html | This will be fixed later, the password for leviathan1 is 3QJ3TgzHDq" ADD_DATE="1155384634" LAST_CHARSET="ISO-8859-1" ID="rdf:#$2wIU71">password to leviathan1</A>
 ```
 
+## 1->2
+you need to know `strings` and `ltrace` to be able to solve this one.
+
+```bash
+% ssh leviathan.labs.overthewire.org -l leviathan1 -p 2223
+leviathan1@gibson:~$ ls -lh
+total 16K
+-r-sr-x--- 1 leviathan2 leviathan1 15K Apr 10 14:23 check
+leviathan1@gibson:~$ file check
+check: setuid ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=990fa9b7d511205601669835610d587780d0195e, for GNU/Linux 3.2.0, not stripped
+leviathan1@gibson:~$ whoami
+leviathan1
+leviathan1@gibson:~$ ./check
+password: test
+Wrong password, Good Bye ...
+leviathan1@gibson:~$ ltrace ./check
+__libc_start_main(0x80490ed, 1, 0xffffd494, 0 <unfinished ...>
+printf("password: ")                                                                = 10
+getchar(0, 0, 0x786573, 0x646f67password: test
+)                                                   = 116
+getchar(0, 116, 0x786573, 0x646f67)                                                 = 101
+getchar(0, 0x6574, 0x786573, 0x646f67)                                              = 115
+strcmp("tes", "sex")                                                                = 1
+puts("Wrong password, Good Bye ..."Wrong password, Good Bye ...
+)                                                = 29
++++ exited (status 0) +++
+leviathan1@gibson:~$ ./check
+password: sex
+$ whoami
+leviathan2
+$ cat /etc/leviathan_pass/leviathan2
+NsN1HwFoyN
+```
+
+
+
