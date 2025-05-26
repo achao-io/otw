@@ -193,6 +193,7 @@ f0n8h2iWLP
 /bin/cat: file.txt: No such file or directory
 ```
 
+
 ## 3->4
 This level involves using `ltrace`.
 
@@ -225,4 +226,63 @@ $ whoami
 leviathan4
 $ cat /etc/leviathan_pass/leviathan4
 WG1egElCvO
+```
+
+
+## 3->4
+This level involves using `ltrace` and converting binary bits into bytes and reading those as UTF8.
+
+https://mayadevbe.me/posts/overthewire/leviathan/level5/
+>Binary code is the most basic representation of data for a computer. This is what the computer uses internally. It comes from the binary number system, which only includes ‘0’ and ‘1’ as digits, also called ‘bits’.
+
+>In computer science, there are different encodings to represent human-readable text. The most basic and common one is the ‘American Standard Code for Information Interchange’ (ASCII). ASCII uses 7 bits to represent one character. Generally, if you were to transform binary to ASCII per hand, you would first transform binary to our decimal system and look up the corresponding letter in an ASCII table. Example: ‘01000001’ -> ‘65’ -> ‘A’.
+
+
+```bash
+leviathan4@gibson:~$ ls -lah
+total 24K
+drwxr-xr-x  3 root root       4.0K Apr 10 14:23 .
+drwxr-xr-x 83 root root       4.0K Apr 10 14:24 ..
+-rw-r--r--  1 root root        220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root root       3.7K Mar 31  2024 .bashrc
+-rw-r--r--  1 root root        807 Mar 31  2024 .profile
+dr-xr-x---  2 root leviathan4 4.0K Apr 10 14:23 .trash
+leviathan4@gibson:~$ cd .trash
+leviathan4@gibson:~/.trash$ ls -alh
+total 24K
+dr-xr-x--- 2 root       leviathan4 4.0K Apr 10 14:23 .
+drwxr-xr-x 3 root       root       4.0K Apr 10 14:23 ..
+-r-sr-x--- 1 leviathan5 leviathan4  15K Apr 10 14:23 bin
+leviathan4@gibson:~/.trash$ file bin
+bin: setuid ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=52e379ac2e364243895250cb84038a8bf5d3e4e5, for GNU/Linux 3.2.0, not stripped
+leviathan4@gibson:~/.trash$ ./bin
+00110000 01100100 01111001 01111000 01010100 00110111 01000110 00110100 01010001 01000100 00001010 
+leviathan4@gibson:~/.trash$ ltrace ./bin
+__libc_start_main(0x80490ad, 1, 0xffffd464, 0 <unfinished ...>
+fopen("/etc/leviathan_pass/leviathan5", "r")                                       = 0
++++ exited (status 255) +++
+leviathan4@gibson:~/.trash$ mktemp -d
+/tmp/tmp.mS55LhfiAZ
+leviathan4@gibson:~/.trash$ ./bin > /tmp/tmp.mS55LhfiAZ/bin.txt
+leviathan4@gibson:~/.trash$ cd /tmp/tmp.mS55LhfiAZ
+leviathan4@gibson:/tmp/tmp.mS55LhfiAZ$ ls
+bin.txt
+leviathan4@gibson:/tmp/tmp.mS55LhfiAZ$ cat bin.txt 
+00110000 01100100 01111001 01111000 01010100 00110111 01000110 00110100 01010001 01000100 00001010
+leviathan4@gibson:/tmp/tmp.mS55LhfiAZ$ python3 bin_convert.py 
+0dyxT7F4QD
+```
+
+```python
+with open("bin.txt") as f:
+    data = f.read()
+
+data = data.strip()
+binary_bit_list = data.split(" ")
+res = ""
+
+for bits in binary_bit_list:
+    res += chr(int(bits, 2))
+
+print(res)
 ```
