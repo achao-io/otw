@@ -229,7 +229,7 @@ WG1egElCvO
 ```
 
 
-## 3->4
+## 4->5
 This level involves using `ltrace` and converting binary bits into bytes and reading those as UTF8.
 
 https://mayadevbe.me/posts/overthewire/leviathan/level5/
@@ -288,7 +288,7 @@ print(res)
 ```
 
 
-## 4->5
+## 5->6
 This level uses `ltrace` with `ln -s`.
 
 ```bash
@@ -444,3 +444,187 @@ leviathan5@gibson:~$ ./leviathan5
 szo7HDB88w
 ```
 
+## 6->7
+This one is crazy.
+
+`gdb`, knowledge of Assembly, registers, `setreuid@plt`, 
+
+Best to reference this.
+https://mayadevbe.me/posts/overthewire/leviathan/level7/
+
+```bash
+leviathan6@gibson:~$ ./leviathan6 
+usage: ./leviathan6 <4 digit code>
+leviathan6@gibson:~$ ltrace ./leviathan6 000
+__libc_start_main(0x80490dd, 2, 0xffffd474, 0 <unfinished ...>
+atoi(0xffffd5e3, 0, 0, 0)                                                        = 0
+puts("Wrong"Wrong
+)                                                                    = 6
++++ exited (status 0) +++
+leviathan6@gibson:~$ ltrace ./leviathan6 0001
+__libc_start_main(0x80490dd, 2, 0xffffd474, 0 <unfinished ...>
+atoi(0xffffd5e2, 0, 0, 0)                                                        = 1
+puts("Wrong"Wrong
+)                                                                    = 6
++++ exited (status 0) +++
+leviathan6@gibson:~$ ltrace ./leviathan6 5555
+__libc_start_main(0x80490dd, 2, 0xffffd474, 0 <unfinished ...>
+atoi(0xffffd5e2, 0, 0, 0)                                                        = 5555
+puts("Wrong"Wrong
+)                                                                    = 6
++++ exited (status 0) +++
+...
+leviathan6@gibson:~$ gdb --args leviathan6 0000
+GNU gdb (Ubuntu 15.0.50.20240403-0ubuntu1) 15.0.50.20240403-git
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from leviathan6...
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.ubuntu.com>
+Enable debuginfod for this session? (y or [n]) y
+Debuginfod has been enabled.
+To make this setting permanent, add 'set debuginfod enabled on' to .gdbinit.
+Download failed: Permission denied.  Continuing without separate debug info for /home/leviathan6/leviathan6.
+(No debugging symbols found in leviathan6)
+(gdb) disassemble main
+Dump of assembler code for function main:
+   0x080491c6 <+0>:	lea    0x4(%esp),%ecx
+   0x080491ca <+4>:	and    $0xfffffff0,%esp
+   0x080491cd <+7>:	push   -0x4(%ecx)
+   0x080491d0 <+10>:	push   %ebp
+   0x080491d1 <+11>:	mov    %esp,%ebp
+   0x080491d3 <+13>:	push   %ebx
+   0x080491d4 <+14>:	push   %ecx
+   0x080491d5 <+15>:	sub    $0x10,%esp
+   0x080491d8 <+18>:	mov    %ecx,%eax
+   0x080491da <+20>:	movl   $0x1bd3,-0xc(%ebp)
+   0x080491e1 <+27>:	cmpl   $0x2,(%eax)
+   0x080491e4 <+30>:	je     0x8049206 <main+64>
+   0x080491e6 <+32>:	mov    0x4(%eax),%eax
+   0x080491e9 <+35>:	mov    (%eax),%eax
+   0x080491eb <+37>:	sub    $0x8,%esp
+   0x080491ee <+40>:	push   %eax
+   0x080491ef <+41>:	push   $0x804a008
+   0x080491f4 <+46>:	call   0x8049040 <printf@plt>
+   0x080491f9 <+51>:	add    $0x10,%esp
+   0x080491fc <+54>:	sub    $0xc,%esp
+   0x080491ff <+57>:	push   $0xffffffff
+   0x08049201 <+59>:	call   0x8049080 <exit@plt>
+   0x08049206 <+64>:	mov    0x4(%eax),%eax
+   0x08049209 <+67>:	add    $0x4,%eax
+   0x0804920c <+70>:	mov    (%eax),%eax
+   0x0804920e <+72>:	sub    $0xc,%esp
+   0x08049211 <+75>:	push   %eax
+   0x08049212 <+76>:	call   0x80490a0 <atoi@plt>
+   0x08049217 <+81>:	add    $0x10,%esp
+   0x0804921a <+84>:	cmp    %eax,-0xc(%ebp)
+   0x0804921d <+87>:	jne    0x804924a <main+132>
+   0x0804921f <+89>:	call   0x8049050 <geteuid@plt>
+   0x08049224 <+94>:	mov    %eax,%ebx
+   0x08049226 <+96>:	call   0x8049050 <geteuid@plt>
+   0x0804922b <+101>:	sub    $0x8,%esp
+   0x0804922e <+104>:	push   %ebx
+   0x0804922f <+105>:	push   %eax
+   0x08049230 <+106>:	call   0x8049090 <setreuid@plt>
+   0x08049235 <+111>:	add    $0x10,%esp
+   0x08049238 <+114>:	sub    $0xc,%esp
+   0x0804923b <+117>:	push   $0x804a022
+   0x08049240 <+122>:	call   0x8049070 <system@plt>
+   0x08049245 <+127>:	add    $0x10,%esp
+   0x08049248 <+130>:	jmp    0x804925a <main+148>
+--Type <RET> for more, q to quit, c to continue without paging--c
+   0x0804924a <+132>:	sub    $0xc,%esp
+   0x0804924d <+135>:	push   $0x804a02a
+   0x08049252 <+140>:	call   0x8049060 <puts@plt>
+   0x08049257 <+145>:	add    $0x10,%esp
+   0x0804925a <+148>:	mov    $0x0,%eax
+   0x0804925f <+153>:	lea    -0x8(%ebp),%esp
+   0x08049262 <+156>:	pop    %ecx
+   0x08049263 <+157>:	pop    %ebx
+   0x08049264 <+158>:	pop    %ebp
+   0x08049265 <+159>:	lea    -0x4(%ecx),%esp
+   0x08049268 <+162>:	ret
+End of assembler dump.
+(gdb) b *0x0804921a
+Breakpoint 1 at 0x804921a
+(gdb) run
+Starting program: /home/leviathan6/leviathan6 0000
+Download failed: Permission denied.  Continuing without separate debug info for system-supplied DSO at 0xf7fc7000.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, 0x0804921a in main ()
+(gdb) info registers
+eax            0x0                 0
+ecx            0xffffd5c7          -10809
+edx            0x0                 0
+ebx            0xf7fade34          -134554060
+esp            0xffffd360          0xffffd360
+ebp            0xffffd378          0xffffd378
+esi            0xffffd450          -11184
+edi            0xf7ffcb60          -134231200
+eip            0x804921a           0x804921a <main+84>
+eflags         0x286               [ PF SF IF ]
+cs             0x23                35
+ss             0x2b                43
+ds             0x2b                43
+es             0x2b                43
+fs             0x0                 0
+gs             0x63                99
+k0             0x0                 0
+k1             0x0                 0
+k2             0x0                 0
+k3             0x0                 0
+k4             0x0                 0
+k5             0x0                 0
+k6             0x0                 0
+k7             0x0                 0
+(gdb) print $ebp-0xc
+$1 = (void *) 0xffffd36c
+(gdb) x 0xffffd36c
+0xffffd36c:	7123
+(gdb) help x
+Examine memory: x/FMT ADDRESS.
+ADDRESS is an expression for the memory address to examine.
+FMT is a repeat count followed by a format letter and a size letter.
+Format letters are o(octal), x(hex), d(decimal), u(unsigned decimal),
+  t(binary), f(float), a(address), i(instruction), c(char), s(string)
+  and z(hex, zero padded on the left).
+Size letters are b(byte), h(halfword), w(word), g(giant, 8 bytes).
+The specified number of objects of the specified size are printed
+according to the format.  If a negative number is specified, memory is
+examined backward from the address.
+
+Defaults for format and size letters are those previously used.
+Default count is 1.  Default address is following last thing printed
+with this command or "print".
+(gdb) q
+leviathan6@gibson:~$ ./leviathan6 7123
+$ cat /etc/leviathan_pass/leviathan7
+qEs5Io5yM8
+...
+leviathan7@gibson:~$ ls -alh
+total 24K
+drwxr-xr-x  2 root       root       4.0K Apr 10 14:23 .
+drwxr-xr-x 83 root       root       4.0K Apr 10 14:24 ..
+-rw-r--r--  1 root       root        220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 root       root       3.7K Mar 31  2024 .bashrc
+-r--r-----  1 leviathan7 leviathan7  178 Apr 10 14:23 CONGRATULATIONS
+-rw-r--r--  1 root       root        807 Mar 31  2024 .profile
+leviathan7@gibson:~$ cat CONGRATULATIONS 
+Well Done, you seem to have used a *nix system before, now try something more serious.
+(Please don't post writeups, solutions or spoilers about the games on the web. Thank you!)
+```
