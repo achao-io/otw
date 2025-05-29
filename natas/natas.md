@@ -40,7 +40,8 @@ Each level has access to the password of the next level. Your job is to somehow 
 - http://natas3.natas.labs.overthewire.org/
 - `natas4:QryZXc2e0zahULdHrtHxzyYkj59kUxLQ`
 > What is robots.txt?
->
+> 
+> https://en.wikipedia.org/wiki/Robots.txt
 > A robots.txt file is a plain text file that tells web crawlers, also known as spiders or bots, how they should crawl a website. It's essentially a set of instructions that specify which parts of a website should be accessed by crawlers and which should be excluded.
 
 <img width="598" alt="Screenshot 2025-05-28 at 7 07 41 PM" src="https://github.com/user-attachments/assets/7b2d63c6-b2be-47e1-b1a9-7d2e8a84afd7" />
