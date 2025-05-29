@@ -17,4 +17,10 @@ URL:      http://natas0.natas.labs.overthewire.org
 
 
 ## 0->1
+http://natas0.natas.labs.overthewire.org/
+
+Solved by accessing Chrome Dev Tools and looking at DOM.
+
+<img width="2137" alt="Screenshot 2025-05-28 at 6 33 45 PM" src="https://github.com/user-attachments/assets/4eba0538-2380-4285-b6a0-2828da22cbf8" />
+`<!--The password for natas1 is 0nzCigAq7t2iALyvU9xcHlYN4MlkIwlq -->`
 
