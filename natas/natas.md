@@ -10,10 +10,9 @@ Each level has access to the password of the next level. Your job is to somehow 
 
 ## 0
 Start here:
-
-Username: natas0
-Password: natas0
-URL:      http://natas0.natas.labs.overthewire.org
+- Username: natas0
+- Password: natas0
+- URL:      http://natas0.natas.labs.overthewire.org
 
 
 ## 0->1
@@ -22,7 +21,8 @@ http://natas0.natas.labs.overthewire.org/
 Solved by accessing Chrome Dev Tools and looking at DOM.
 
 <img width="2137" alt="Screenshot 2025-05-28 at 6 33 45 PM" src="https://github.com/user-attachments/assets/4eba0538-2380-4285-b6a0-2828da22cbf8" />
-<!--The password for natas1 is 0nzCigAq7t2iALyvU9xcHlYN4MlkIwlq -->
+The password for natas1 is 0nzCigAq7t2iALyvU9xcHlYN4MlkIwlq
+
 
 ## 1->2
 http://natas1.natas.labs.overthewire.org/
@@ -30,4 +30,4 @@ http://natas1.natas.labs.overthewire.org/
 Right clicking was blocked, but F12 gets me to Dev Tools.
 
 <img width="2229" alt="Screenshot 2025-05-28 at 6 36 20 PM" src="https://github.com/user-attachments/assets/a8c112fe-438e-400d-92a3-5843ad49425e" />
-<!--The password for natas2 is TguMNxKo1DSa1tujBLuZJnDUlCcUAPlI -->
+The password for natas2 is TguMNxKo1DSa1tujBLuZJnDUlCcUAPlI
