@@ -137,3 +137,19 @@ Access granted. The password for natas6 is 0RoJwHdSKWFTYR5WuiAewauSuNaBXned</div
 
 Can also edit the Cookie directly via Dev Tools.
 <img width="1502" alt="Screenshot 2025-05-30 at 7 27 18 PM" src="https://github.com/user-attachments/assets/af811c78-9ea1-43c2-a48c-046c67da33d2" />
+
+## 6->7
+- http://natas6.natas.labs.overthewire.org/
+- `natas7:bmg8SvU1LizuWjx3y7xkNERkHxGre0GS`
+- https://mayadevbe.me/posts/overthewire/natas/natas6/
+  - Recommended https://www.w3schools.com/php/
+- Hm, a bit stuck on this one.
+- Ah, in source code there is a reference to `include "includes/secret.inc";`. Headed to `http://natas6.natas.labs.overthewire.org/includes/secret.inc`, and I see the following.
+
+```
+http://natas6.natas.labs.overthewire.org/includes/secret.inc
+<?
+$secret = "FOEIUWGHFEEUHOFUOIU";
+?>
+```
+- Input the `$secret` and we get `Access granted. The password for natas7 is bmg8SvU1LizuWjx3y7xkNERkHxGre0GS`
