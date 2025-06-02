@@ -153,3 +153,11 @@ $secret = "FOEIUWGHFEEUHOFUOIU";
 ?>
 ```
 - Input the `$secret` and we get `Access granted. The password for natas7 is bmg8SvU1LizuWjx3y7xkNERkHxGre0GS`
+
+## 7->8
+- http://natas7.natas.labs.overthewire.org/
+- `natas8:xcoXLmzMkoIP9D7hlgPlh9XD7OgLAe5Q`
+- Hint: `<!-- hint: password for webuser natas8 is in /etc/natas_webpass/natas8 -->`
+- Needed to change the `page=` variable in the URL. "This is a query parameter where the variable name is "page" and its value is "/etc/natas_webpass/natas8". This appears to be attempting to access a file path on the server through a parameter, which might be exploiting a directory traversal or local file inclusion vulnerability."
+- https://securitytimes.wordpress.com/2017/06/25/natas7-8/
+<img width="831" alt="Screenshot 2025-06-01 at 11 17 00 PM" src="https://github.com/user-attachments/assets/0389fa2d-12bb-405c-b246-227ef1a83e03" />
