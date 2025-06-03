@@ -161,3 +161,30 @@ $secret = "FOEIUWGHFEEUHOFUOIU";
 - Needed to change the `page=` variable in the URL. "This is a query parameter where the variable name is "page" and its value is "/etc/natas_webpass/natas8". This appears to be attempting to access a file path on the server through a parameter, which might be exploiting a directory traversal or local file inclusion vulnerability."
 - https://securitytimes.wordpress.com/2017/06/25/natas7-8/
 <img width="831" alt="Screenshot 2025-06-01 at 11 17 00 PM" src="https://github.com/user-attachments/assets/0389fa2d-12bb-405c-b246-227ef1a83e03" />
+
+## 8->9
+- http://natas8.natas.labs.overthewire.org/
+- `natas9:ZE1ck82lmdGIoErlhQgWND6j2Wzz6b6t`
+```php
+<?
+
+$encodedSecret = "3d3d516343746d4d6d6c315669563362";
+
+function encodeSecret($secret) {
+    return bin2hex(strrev(base64_encode($secret)));
+}
+
+if(array_key_exists("submit", $_POST)) {
+    if(encodeSecret($_POST['secret']) == $encodedSecret) {
+    print "Access granted. The password for natas9 is <censored>";
+    } else {
+    print "Wrong secret";
+    }
+}
+?>
+```
+```bash
+- undo bin2hex "3d3d516343746d4d6d6c315669563362" > "==QcCtmMml1ViV3b"
+- undo reverse & base64_decode "==QcCtmMml1ViV3b" > atob(x.split("").reverse().join("")) > "oubWYf2kBq"
+- input secret (oubWYf2kBq) > Access granted. The password for natas9 is ZE1ck82lmdGIoErlhQgWND6j2Wzz6b6t
+```
