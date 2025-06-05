@@ -228,3 +228,45 @@ if($key != "") {
 </body>
 ...
 ```
+
+## 10->11
+- http://natas10.natas.labs.overthewire.org/
+- `natas11:UJdqkK1pTu6VLt9UHWAgRZz6sVUZ3lEk`
+- Looks like some input sanitization was added. Certain characters are now not allowed. Can we exploit another way?
+- Yes, there's another way to achieve command injection-like behavior to read files without using `;`, `|`, or `&`, by manipulating the arguments of the `grep` command itself. The PHP script executes the command: `passthru("grep -i $key dictionary.txt");` The filter `preg_match('/[;|&]/',$key)` prevents the use of semicolon, pipe, and ampersand characters in the `$key` variable. However, other shell metacharacters or simply the structure of shell command arguments can be used. You can make grep read from an arbitrary file by passing the filename as an argument.
+- We can combine `grep` with a regex expression, `^`. The `^` character in a regular expression is an anchor that matches the beginning of a line. When you use `^` as the entire pattern, `grep` looks for lines that have a beginning. Since every line in a file has a beginning (even an "empty" line that just contains a newline character), this pattern will match every line in the specified file.
+- Therefore, the command `grep ^ ~/slack/sandbox/LICENSE` will effectively print all lines from the file `~/slack/sandbox/LICENSE` to the standard output. It's a way to display the entire content of a file, similar in output to `cat ~/slack/sandbox/LICENSE` for non-empty files, but it does so by matching a pattern at the start of each line.
+```html
+<body>
+<h1>natas10</h1>
+<div id="content">
+
+For security reasons, we now filter on certain characters<br/><br/>
+<form>
+Find words containing: <input name=needle><input type=submit name=submit value=Search><br><br>
+</form>
+
+
+Output:
+<pre>
+<?
+$key = "";
+
+if(array_key_exists("needle", $_REQUEST)) {
+    $key = $_REQUEST["needle"];
+}
+
+if($key != "") {
+    if(preg_match('/[;|&]/',$key)) {
+        print "Input contains an illegal character!";
+    } else {
+        passthru("grep -i $key dictionary.txt");
+    }
+}
+?>
+</pre>
+
+<div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+</div>
+</body>
+```
