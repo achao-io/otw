@@ -270,3 +270,25 @@ if($key != "") {
 </div>
 </body>
 ```
+
+## 11->12
+- http://natas11.natas.labs.overthewire.org/
+- `natas12:yZdkjAYZRd3R7tq7T5kXMjMJlOIkzDeB`
+- A clue, `Cookies are protected with XOR encryption`, Background color: `#ffffff`. Chrome Dev Tools > Application > Cookies. Looks like a decoding kind of problem.
+- The most involved natas challenge yet, lots of PHP, XOR encryption knowledge. Building a new cookie.
+- Steps
+  - Getting the cookie value without XOR 'encryption' (PHP Compiler)
+  - Get the XOR key (Cyber Chef)
+    - We can XOR the two cookies together to get the XOR key, then use this to create a new cookie and encrypt it.
+  - Making a new cookie (Cyber Chef)
+- Info
+  - https://learnhacking.io/overthewire-natas-level-11-walkthrough/
+  - https://accu.org/journals/overload/20/109/lewin_1915
+- Tools
+  - https://gchq.github.io/CyberChef/
+  - https://www.w3schools.com/php/phptryit.asp?filename=tryphp_compiler 
+<img width="1507" alt="Screenshot 2025-06-05 at 10 22 11 PM" src="https://github.com/user-attachments/assets/05ec9858-b273-452c-8064-c688e0376941" />
+<img width="1512" alt="Screenshot 2025-06-05 at 10 24 05 PM" src="https://github.com/user-attachments/assets/388dd8dc-6690-4896-956d-ccb5e72dca39" />
+<img width="1506" alt="Screenshot 2025-06-05 at 10 25 38 PM" src="https://github.com/user-attachments/assets/1131febd-dea6-464d-8255-bb1a68534024" />
+<img width="665" alt="Screenshot 2025-06-05 at 10 26 04 PM" src="https://github.com/user-attachments/assets/aba8791e-ec4f-44b7-a67e-9f3b90a0d48c" />
+
