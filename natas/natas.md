@@ -292,3 +292,8 @@ if($key != "") {
 <img width="1506" alt="Screenshot 2025-06-05 at 10 25 38 PM" src="https://github.com/user-attachments/assets/1131febd-dea6-464d-8255-bb1a68534024" />
 <img width="665" alt="Screenshot 2025-06-05 at 10 26 04 PM" src="https://github.com/user-attachments/assets/aba8791e-ec4f-44b7-a67e-9f3b90a0d48c" />
 
+## 12->13
+- http://natas12.natas.labs.overthewire.org/
+- `natas13:`
+- https://learnhacking.io/overthewire-natas-level-12-walkthrough/
+- Will take some more time on this one.
