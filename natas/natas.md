@@ -321,7 +321,7 @@ GIF87a<?php echo shell_exec($_GET['e'].' 2>&1'); ?>
 
 ## 14->15
 - http://natas14.natas.labs.overthewire.org/
-- `natas15:`
+- `natas15:SdqIqBsFcz3yotlNYErZSZwblkm0lrvx`
 - This challenge shows a query to a database to check user inputted Username and Password information. It only checks that the query returns more than one row, which gives a clue that we need to submit a query somehow to the server.
 - https://www.php.net/manual/en/function.mysqli-connect.php
 ```php
@@ -336,3 +336,5 @@ if(mysqli_num_rows(mysqli_query($link, $query)) > 0) {
   - https://learnhacking.io/basic-web-skills-setting-up-burp-suite/
   - https://chromewebstore.google.com/detail/foxyproxy/gcknhkkoolaabfmlnjonogaaifnjlfnp?hl=en&pli=1
   - https://primer.picoctf.org/#_introduction
+- `" OR 1=1 --` solved it. But why does it need to be in both the `Username` and `Password` field?
+<img width="1512" alt="Screenshot 2025-06-08 at 4 24 29 PM" src="https://github.com/user-attachments/assets/476a11a0-dabb-470b-8681-adc040d9e2b2" />
