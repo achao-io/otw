@@ -338,3 +338,10 @@ if(mysqli_num_rows(mysqli_query($link, $query)) > 0) {
   - https://primer.picoctf.org/#_introduction
 - `" OR 1=1 --` solved it. But why does it need to be in both the `Username` and `Password` field?
 <img width="1512" alt="Screenshot 2025-06-08 at 4 24 29 PM" src="https://github.com/user-attachments/assets/476a11a0-dabb-470b-8681-adc040d9e2b2" />
+
+## 15->16
+- http://natas15.natas.labs.overthewire.org/
+- `natas16:`
+- https://learnhacking.io/overthewire-natas-level-15-walkthrough/
+- Enter "Blind SQL Injection" (https://owasp.org/www-community/attacks/Blind_SQL_Injection)
+- Need more time, will pick up tomorrow
