@@ -410,3 +410,9 @@ Complete password: hPkjKYviLQctEW33QmuXL6eDVfMW4sGo
 - 2025-06-11: Hm, password isn't working. Need to look further into this.
 - 2025-06-12: Break day
 - 2025-06-13: Weird, `hPkjKYviLQctEW33QmuXL6eDVfMW4sGo` worked.
+
+## 16->17
+- http://natas16.natas.labs.overthewire.org/
+- `natas16:hPkjKYviLQctEW33QmuXL6eDVfMW4sGo`
+- https://learnhacking.io/overthewire-natas-level-16-walkthrough/
+- "Look for boolean true/false output to give you information about blind queries being executed."
