@@ -417,3 +417,4 @@ Complete password: hPkjKYviLQctEW33QmuXL6eDVfMW4sGo
 - https://learnhacking.io/overthewire-natas-level-16-walkthrough/
 - "Look for boolean true/false output to give you information about blind queries being executed."
 - 2025-06-15: Break day
+- 2025-06-16: Break day 2
