@@ -533,3 +533,7 @@ Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6ZLlCGgCJU
 Found one more char : 6OG1PbKdVjyBlpxgD4DDbRG6ZLlCGgCJUV
 Done!
 ```
+
+## 18->19
+- http://natas18.natas.labs.overthewire.org/
+- `natas19:`
