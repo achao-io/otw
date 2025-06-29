@@ -676,5 +676,18 @@ Password: p5mCvP7GS2K6Bmt3gqhM2Fc1A5T8MVyw</pre></div>
 
 ## 20->21
 - http://natas20.natas.labs.overthewire.org/
-- `natas21:`
+- `natas21:BPhv63cKE1lkQl04cE5CuFTzXe15NfiH`
 - 2025-06-27: Break Day
+- https://nils-maeurer.de/post/overthewire-natas20-21/
+- https://www.w3schools.com/php/php_sessions.asp
+- https://www.php.net/manual/en/intro.session.php
+- What is a PHP Session? A session is a way to store information (in variables) to be used across multiple pages. Unlike a cookie, the information is not stored on the users computer.
+- https://www.php.net/manual/en/class.sessionhandler.php
+- https://www.php.net/manual/en/function.session-set-save-handler.php
+- Tip: Any time that developers go out of their way to avoid using the normal behavior of a function or library is an opportunity to find a bug. Not to say that open source developers are infallible, but the intended usage is usually there for good reason.
+- This solved it, but need to understand why: http://natas20.natas.labs.overthewire.org/index.php?name=test%0Aadmin%201?debug
+```
+You are an admin. The credentials for the next level are:
+Username: natas21
+Password: BPhv63cKE1lkQl04cE5CuFTzXe15NfiH
+```
