@@ -693,3 +693,11 @@ Password: BPhv63cKE1lkQl04cE5CuFTzXe15NfiH
 - 2025-06-29: Break Day
 - 2025-06-30: Break Day
 ```
+
+## 21->22
+- http://natas21.natas.labs.overthewire.org/
+- `natas22:d8rwGBl0Xslg3b76uh3fEbSlnOUBlozz`
+- https://learnhacking.io/overthewire-natas-level-21-walkthrough/
+- In PHP, by default session data is stored in files on the server.
+- https://canvas.seattlecentral.edu/courses/937693/pages/10-advanced-php-sessions?ref=learnhacking.io
+- Burp Suite is insane.
