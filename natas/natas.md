@@ -701,3 +701,6 @@ Password: BPhv63cKE1lkQl04cE5CuFTzXe15NfiH
 - In PHP, by default session data is stored in files on the server.
 - https://canvas.seattlecentral.edu/courses/937693/pages/10-advanced-php-sessions?ref=learnhacking.io
 - Burp Suite is insane.
+
+## 22->23
+- 2025-07-02: Break Day
