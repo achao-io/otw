@@ -702,5 +702,6 @@ Password: BPhv63cKE1lkQl04cE5CuFTzXe15NfiH
 - https://canvas.seattlecentral.edu/courses/937693/pages/10-advanced-php-sessions?ref=learnhacking.io
 - Burp Suite is insane.
 
-## 22->23
-- 2025-07-02: Break Day
+<img width="1512" alt="Screenshot 2025-07-01 at 11 20 33 PM" src="https://github.com/user-attachments/assets/da0bcf70-00e6-491c-808d-c0ed3c40cfc0" />
+
+<img width="1512" alt="Screenshot 2025-07-01 at 11 19 09 PM" src="https://github.com/user-attachments/assets/cc5fb0b6-c685-432c-894c-5d327cfa25c4" />
