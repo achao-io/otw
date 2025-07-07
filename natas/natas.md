@@ -737,3 +737,4 @@ if(array_key_exists("revelio", $_GET)) {
     }
 ?>
 ```
+<img width="1512" alt="Screenshot 2025-07-06 at 11 14 20 PM" src="https://github.com/user-attachments/assets/1001e08b-8faf-4d01-9b9a-d826b4784bc1" />
