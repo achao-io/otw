@@ -711,3 +711,29 @@ Password: BPhv63cKE1lkQl04cE5CuFTzXe15NfiH
 - 2025-07-03 Break Day
 - 2025-07-04 Break Day
 - 2025-07-05 Break Day
+
+- http://natas22.natas.labs.overthewire.org/
+- `natas23:d8rwGBl0Xslg3b76uh3fEbSlnOUBlozz`
+- https://nils-maeurer.de/post/overthewire-natas22-25/
+- Pretty straightforward one, just add `?revelio=1` to the request in Burp Suite Repeater.
+
+```php
+<?php
+session_start();
+
+if(array_key_exists("revelio", $_GET)) {
+    // only admins can reveal the password
+    if(!($_SESSION and array_key_exists("admin", $_SESSION) and $_SESSION["admin"] == 1)) {
+    header("Location: /");
+    }
+}
+?>
+
+<?php
+    if(array_key_exists("revelio", $_GET)) {
+    print "You are an admin. The credentials for the next level are:<br>";
+    print "<pre>Username: natas23\n";
+    print "Password: <censored></pre>";
+    }
+?>
+```
