@@ -713,7 +713,7 @@ Password: BPhv63cKE1lkQl04cE5CuFTzXe15NfiH
 - 2025-07-05 Break Day
 
 - http://natas22.natas.labs.overthewire.org/
-- `natas23:d8rwGBl0Xslg3b76uh3fEbSlnOUBlozz`
+- `natas23:dIUQcI3uSus1JEOSSWRAEXBG8KbR8tRs`
 - https://nils-maeurer.de/post/overthewire-natas22-25/
 - Pretty straightforward one, just add `?revelio=1` to the request in Burp Suite Repeater.
 
