@@ -786,5 +786,7 @@ This would print "Success!" because passing an array to `strcmp()` causes it to 
 
 ## 25->26
 - http://natas25.natas.labs.overthewire.org/
-- `natas26:`
+- `natas26:cVXXwxMS3Y26n5UZU89QgpGmWCelaQlE`
 - 2025-07-11: Break Day
+- https://nils-maeurer.de/post/overthewire-natas22-25/#natas25
+- This one was pretty tricky. To solve it, we needed to understand how we could exploit path traversal, reuse what was being logged (`$_SERVER['HTTP_USER_AGENT']` -> User-Agent: `<?php readfile("/etc/natas_webpass/natas26") ?>`) to our advantage, and the server file structure.
