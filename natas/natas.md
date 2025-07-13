@@ -790,3 +790,4 @@ This would print "Success!" because passing an array to `strcmp()` causes it to 
 - 2025-07-11: Break Day
 - https://nils-maeurer.de/post/overthewire-natas22-25/#natas25
 - This one was pretty tricky. To solve it, we needed to understand how we could exploit path traversal, reuse what was being logged (`$_SERVER['HTTP_USER_AGENT']` -> User-Agent: `<?php readfile("/etc/natas_webpass/natas26") ?>`) to our advantage, and the server file structure.
+<img width="1512" height="982" alt="Screenshot 2025-07-12 at 5 04 25 PM" src="https://github.com/user-attachments/assets/0ec5b14b-152f-4385-b65d-a2722a40e15e" />
