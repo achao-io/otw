@@ -791,3 +791,14 @@ This would print "Success!" because passing an array to `strcmp()` causes it to 
 - https://nils-maeurer.de/post/overthewire-natas22-25/#natas25
 - This one was pretty tricky. To solve it, we needed to understand how we could exploit path traversal, reuse what was being logged (`$_SERVER['HTTP_USER_AGENT']` -> User-Agent: `<?php readfile("/etc/natas_webpass/natas26") ?>`) to our advantage, and the server file structure.
 <img width="1512" height="982" alt="Screenshot 2025-07-12 at 5 04 25 PM" src="https://github.com/user-attachments/assets/0ec5b14b-152f-4385-b65d-a2722a40e15e" />
+
+
+## 26->27
+- http://natas26.natas.labs.overthewire.org/
+- `natas27:`
+- Read through the code, I think this has to do with creating a malicious serializable object and injecting/exploiting via `$_COOKIE['drawing']`
+
+via Cursor
+> Yes, this is a classic PHP object injection vulnerability. You can exploit it by crafting a malicious Logger object, serializing and base64-encoding it, and setting it as the drawing cookie. This can lead to arbitrary file writes and potentially remote code execution, depending on the environment.
+
+- Drafted `natas26_payload_fixed.php` with the help of Cursor + Gemini. We build a `$_COOKIE["drawing"]` payload to inject a webshell that returns the flag.
