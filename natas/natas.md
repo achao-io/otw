@@ -795,10 +795,15 @@ This would print "Success!" because passing an array to `strcmp()` causes it to 
 
 ## 26->27
 - http://natas26.natas.labs.overthewire.org/
-- `natas27:`
+- `natas27:u3RRffXjysjgwFU6b9xa23i6prmUsYne`
 - Read through the code, I think this has to do with creating a malicious serializable object and injecting/exploiting via `$_COOKIE['drawing']`
 
 via Cursor
 > Yes, this is a classic PHP object injection vulnerability. You can exploit it by crafting a malicious Logger object, serializing and base64-encoding it, and setting it as the drawing cookie. This can lead to arbitrary file writes and potentially remote code execution, depending on the environment.
 
 - Drafted `natas26_payload_fixed.php` with the help of Cursor + Gemini. We build a `$_COOKIE["drawing"]` payload to inject a webshell that returns the flag.
+
+
+## 27->28
+- http://natas27.natas.labs.overthewire.org/
+- `natas28:`
