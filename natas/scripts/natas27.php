@@ -18,6 +18,9 @@
 
 
 /*
+-- The database schema defines username as varchar(64), so any username longer 
+-- than 64 characters will be truncated.
+
 CREATE TABLE `users` (
   `username` varchar(64) DEFAULT NULL,
   `password` varchar(64) DEFAULT NULL
@@ -40,7 +43,24 @@ function checkCredentials($link,$usr,$pass){
 
 
 function validUser($link,$usr){
-
+    /** 
+     * However, in validUser, the username is not truncated before being checked.
+     * 
+     * This means you can create two different usernames that, when truncated to 64 
+     * characters, are the same in the database, but are treated as different by 
+     * the application logic
+     * 
+     * You can register a username that is longer than 64 characters, such that 
+     * the first 64 characters match an existing user (e.g., "admin"), and the rest 
+     * is arbitrary.
+     * 
+     * When you log in with the long username, the application will check for the full 
+     * username (which doesn't exist), so it will create a new user with the truncated 
+     * username (which matches "admin" in the database).
+     * 
+     * Now, you can log in as "admin" with your chosen password, because the 
+     * password for the truncated username in the database is now your password.
+     */
     $user=mysqli_real_escape_string($link, $usr);
 
     $query = "SELECT * from users where username='$user'";
@@ -76,9 +96,22 @@ function dumpData($link,$usr){
 function createUser($link, $usr, $pass){
 
     if($usr != trim($usr)) {
+        /**
+         * The check only blocks usernames with leading or trailing whitespace.
+         * 
+         * It does not block usernames that are longer than 64 characters, as long 
+         * as they don't have leading or trailing spaces.
+         * 
+         * e.g.   adminAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+         */
         echo "Go away hacker";
         return False;
     }
+    /**
+     * The main vulnerability in this file is in the way usernames are handled, 
+     * specifically in the createUser and validUser functions, and how they 
+     * interact with the database.
+     */
     $user=mysqli_real_escape_string($link, substr($usr, 0, 64));
     $password=mysqli_real_escape_string($link, substr($pass, 0, 64));
 
