@@ -827,3 +827,5 @@ Welcome natas28!<br>Here is your data:<br>Array
 ## 28->29
 - http://natas28.natas.labs.overthewire.org/
 - `natas29:`
+- 2025-07-18 Break Day
+- 2025-07-19 Break Day
