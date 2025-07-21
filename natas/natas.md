@@ -826,6 +826,11 @@ Welcome natas28!<br>Here is your data:<br>Array
 
 ## 28->29
 - http://natas28.natas.labs.overthewire.org/
-- `natas29:`
+- `natas29:31F4j3Qi2PnuhIZQokxXk1L3QT9Cppns`
 - 2025-07-18 Break Day
 - 2025-07-19 Break Day
+- This one is crazy.
+- The solution: http://natas28.natas.labs.overthewire.org/search.php/?query=G%2BglEae6W%2F1XjA7vRm21nNyEco%2Fc%2BJ2TdR0Qp8dcjPItlMM3qTizkRB5P2zYxJsb%2B76GKJOY6adng39QUMPprGe5X2vrsM8BRZAxT9Bt8cmSBdGBYutGkE7dxkKLuB1QrDuHHBxEg4a0XNNtno9y9GVRSbu6ISPYnZVBfqJ%2FOntzil%2F7SkUAJGd1F1rllrvW803zOcae3OEfZlC7ztYnAg%3D%3D
+
+- The flag was obtained by exploiting a vulnerability in ECB (Electronic Code Book) encryption mode combined with SQL injection. The web application was encrypting user queries into a database search, but because ECB mode encrypts each 16-byte block independently without chaining, identical plaintext blocks always produce identical ciphertext blocks.
+- The attack worked by carefully crafting a SQL injection payload with specific padding (9 A's followed by a single quote) to align the escaped quote character at a block boundary. Since the application was escaping single quotes by adding a backslash, the attacker could identify and isolate the block containing the escape sequence. By replacing this "bad" block with a "dummy" block from a benign query (containing only spaces), they could bypass the SQL injection protection. The final payload used UNION SELECT ALL password FROM users to extract passwords from the database, revealing the flag for natas29.
