@@ -836,3 +836,4 @@ Welcome natas28!<br>Here is your data:<br>Array
 - The attack worked by carefully crafting a SQL injection payload with specific padding (9 A's followed by a single quote) to align the escaped quote character at a block boundary. Since the application was escaping single quotes by adding a backslash, the attacker could identify and isolate the block containing the escape sequence. By replacing this "bad" block with a "dummy" block from a benign query (containing only spaces), they could bypass the SQL injection protection. The final payload used UNION SELECT ALL password FROM users to extract passwords from the database, revealing the flag for natas29.
 - 2025-07-21 Break Day
 - 2025-07-22 Break Day
+- 2025-07-23 Break Day
