@@ -939,9 +939,12 @@ END
 - WQhx1BvcmP9irs2MP9tRnLsNaDI76YrH
 
 
-
 ## 30->31
 - http://natas30.natas.labs.overthewire.org/
 - `natas31:m7bfjAHpJmSYgQWWeqRE2qVBuMiRNq0y`
 - https://learnhacking.io/overthewire-natas-level-30-walkthrough/
 - https://security.stackexchange.com/questions/175703/is-this-perl-database-connection-vulnerable-to-sql-injection/175872#175872
+
+
+## 31->32
+- http://natas31.natas.labs.overthewire.org/
