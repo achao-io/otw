@@ -948,3 +948,4 @@ END
 
 ## 31->32
 - http://natas31.natas.labs.overthewire.org/
+- `natas32:`
