@@ -986,3 +986,7 @@ Content-Disposition: form-data; name="submit"
 Upload
 ------WebKitFormBoundarylrrZCTqDvB2wjAi6--
 ```
+
+## 32->33
+- http://natas32.natas.labs.overthewire.org/
+- `natas33:`
