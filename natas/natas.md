@@ -1030,3 +1030,4 @@ Upload
 ## 33->34
 - http://natas33.natas.labs.overthewire.org/
 - `natas34:`
+- https://learnhacking.io/overthewire-natas-level-33-walkthrough/
