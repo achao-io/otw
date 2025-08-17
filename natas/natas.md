@@ -1031,3 +1031,5 @@ Upload
 - http://natas33.natas.labs.overthewire.org/
 - `natas34:j4O7Q7Q5er5XFRCepmyXJaWCSIrslCJY`
 - https://learnhacking.io/overthewire-natas-level-33-walkthrough/
+
+<img width="1065" height="241" alt="Screenshot 2025-08-17 at 4 29 04 PM" src="https://github.com/user-attachments/assets/95802301-c853-4f49-baa6-c2f1e604c419" />
