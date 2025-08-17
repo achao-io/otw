@@ -1029,6 +1029,5 @@ Upload
 
 ## 33->34
 - http://natas33.natas.labs.overthewire.org/
-- `natas34:`
+- `natas34:j4O7Q7Q5er5XFRCepmyXJaWCSIrslCJY`
 - https://learnhacking.io/overthewire-natas-level-33-walkthrough/
-- break day
